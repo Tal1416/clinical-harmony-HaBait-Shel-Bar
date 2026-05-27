@@ -127,21 +127,102 @@ body { background: transparent; font-family: "Atkinson Hyperlegible Next", syste
 }
 .bounce-dot { animation: bounce-dot 1.2s infinite ease-in-out both; }
 
+/* ─── Motion utilities ─────────────────────────────────────── */
+
+/* Sequential entrance — apply .entrance to a container and .entrance-item
+   to each child. Children fade-up in order. */
+.entrance { perspective: 800px; }
+.entrance-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: entranceFade .9s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.entrance-item:nth-child(1) { animation-delay: .05s; }
+.entrance-item:nth-child(2) { animation-delay: .15s; }
+.entrance-item:nth-child(3) { animation-delay: .25s; }
+.entrance-item:nth-child(4) { animation-delay: .35s; }
+.entrance-item:nth-child(5) { animation-delay: .45s; }
+.entrance-item:nth-child(6) { animation-delay: .55s; }
+@keyframes entranceFade {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gentle float — for hero mockups */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0) rotateZ(0); }
+  50%      { transform: translateY(-10px) rotateZ(.2deg); }
+}
+.float { animation: floatY 6s ease-in-out infinite; }
+.float-slow { animation: floatY 9s ease-in-out infinite; }
+
+/* Slow rotate — for decorative orbs */
+@keyframes spinSlow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spinSlow 22s linear infinite; }
+
+/* Glow pulse — for status indicators */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(142, 58, 93, .35); }
+  50%      { box-shadow: 0 0 0 12px rgba(142, 58, 93, 0); }
+}
+.glow-pulse { animation: glowPulse 2.4s ease-out infinite; border-radius: 9999px; }
+
+/* Button shine — a diagonal highlight that sweeps across on hover */
+.btn-shine { position: relative; overflow: hidden; isolation: isolate; }
+.btn-shine::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .8s cubic-bezier(.22,.61,.36,1);
+  pointer-events: none;
+}
+.btn-shine:hover::after { transform: translateX(120%); }
+
+/* Marquee strip (used for trust badges) */
+.marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee-track { display: inline-flex; gap: 3rem; animation: marquee 30s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Accordion smooth open (works with <details>) */
+details.smooth { interpolate-size: allow-keywords; }
+details.smooth > div { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.22,.61,.36,1); }
+details.smooth[open] > div { grid-template-rows: 1fr; }
+details.smooth > div > * { overflow: hidden; min-height: 0; }
+
+/* Tilt on hover — for feature cards */
+.tilt { transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s ease; transform-style: preserve-3d; }
+.tilt:hover { transform: translateY(-4px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 24px 48px -16px rgba(142, 58, 93, .18); }
+
+/* Count-up — just a soft fade-in on the digits */
+@keyframes countFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.count-up { animation: countFade .8s cubic-bezier(.22,.61,.36,1) both; }
+
+/* Soft focus ring with brand color */
+.focus-bloom:focus-visible {
+  outline: 2px solid #8E3A5D;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
 /* ─── Animated gradient backdrop — Bloom (plum + sage + amber peach) ─── */
 .gradient-bg {
   position: fixed; inset: 0; z-index: -1;
   pointer-events: none; overflow: hidden;
   background:
     radial-gradient(closest-side at var(--bg-x1, 18%) var(--bg-y1, 22%),
-      rgba(142, 58, 93, .20), transparent 70%),
+      rgba(142, 58, 93, .22), transparent 72%),
     radial-gradient(closest-side at var(--bg-x2, 82%) var(--bg-y2, 30%),
-      rgba(95, 138, 110, .22), transparent 70%),
+      rgba(95, 138, 110, .24), transparent 72%),
     radial-gradient(closest-side at var(--bg-x3, 60%) var(--bg-y3, 85%),
-      rgba(245, 207, 166, .38), transparent 72%),
+      rgba(245, 207, 166, .42), transparent 74%),
+    radial-gradient(closest-side at 15% 95%, rgba(255, 177, 200, .25), transparent 65%),
+    radial-gradient(closest-side at 95% 5%, rgba(140, 103, 72, .18), transparent 60%),
     linear-gradient(180deg, #FBF7F6 0%, #F5EEED 100%);
-  background-size: 120% 120%, 120% 120%, 120% 120%, 100% 100%;
+  background-size: 130% 130%, 130% 130%, 130% 130%, 110% 110%, 110% 110%, 100% 100%;
   animation: gradientDrift 22s ease-in-out infinite alternate;
-  filter: saturate(1.05);
+  filter: saturate(1.08);
 }
 @keyframes gradientDrift {
   0%   { --bg-x1: 18%; --bg-y1: 22%; --bg-x2: 82%; --bg-y2: 30%; --bg-x3: 60%; --bg-y3: 85%; }
@@ -166,13 +247,16 @@ body { background: transparent; font-family: "Atkinson Hyperlegible Next", syste
   filter: blur(40px);
 }
 
-/* Scroll progress bar */
+/* Scroll progress bar — slightly chunkier, glowing */
 .scroll-progress {
-  position: fixed; top: 0; left: 0; height: 3px; z-index: 60;
+  position: fixed; top: 0; left: 0; height: 4px; z-index: 60;
   width: calc(var(--scroll) * 100%);
-  background: linear-gradient(90deg, #8E3A5D, #A5476F 35%, #5F8A6E 70%, #F5CFA6 100%);
-  box-shadow: 0 0 12px rgba(142, 58, 93, .35);
+  background: linear-gradient(90deg, #8E3A5D 0%, #A5476F 25%, #5F8A6E 60%, #F5CFA6 90%, #FFD9E2 100%);
+  background-size: 200% 100%;
+  background-position: calc(100% - var(--scroll, 0) * 100%) 50%;
+  box-shadow: 0 0 16px rgba(142, 58, 93, .45), 0 0 4px rgba(255, 177, 200, .35);
   transition: width .08s linear;
+  border-radius: 0 4px 4px 0;
 }
 
 /* Animated gradient text */

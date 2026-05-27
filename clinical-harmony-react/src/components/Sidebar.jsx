@@ -57,7 +57,7 @@ export default function Sidebar() {
 
       <button
         onClick={() => navigate('/log')}
-        className="mt-stack-md w-full bg-primary text-on-primary py-stack-md rounded-xl font-bold text-body-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition shadow-md shadow-primary/20"
+        className="btn-shine mt-stack-md w-full bg-primary text-on-primary py-stack-md rounded-xl font-bold text-body-md flex items-center justify-center gap-2 hover:bg-primary-container active:scale-95 transition shadow-lg shadow-primary/25 focus-bloom"
       >
         <span className="material-symbols-outlined">add_circle</span> Log Symptom
       </button>

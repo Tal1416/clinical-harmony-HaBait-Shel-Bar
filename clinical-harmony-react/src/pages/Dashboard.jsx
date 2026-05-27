@@ -59,21 +59,33 @@ export default function Dashboard() {
               </Link>
             </div>
 
-            <div className="bg-surface-container-lowest p-stack-lg rounded-xl clinical-shadow status-card-stable flex flex-col lg:flex-row gap-stack-lg items-start lg:items-center justify-between fade-in">
-              <div>
+            <div className="bg-surface-container-lowest p-stack-lg rounded-2xl clinical-shadow status-card-stable flex flex-col lg:flex-row gap-stack-lg items-start lg:items-center justify-between fade-in relative overflow-hidden">
+              <div className="absolute -top-12 -right-12 w-40 h-40 bg-primary/8 rounded-full blur-3xl" />
+              <div className="relative">
                 <span className="text-label-caps text-primary uppercase tracking-widest">Global Health Status</span>
-                <div className="flex items-center gap-unit mt-1">
+                <div className="flex items-center gap-2 mt-1">
                   <h3 className="text-headline-lg font-headline-lg text-on-surface">Stable</h3>
-                  <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  <span className="glow-pulse grid place-items-center w-10 h-10">
+                    <span className="material-symbols-outlined text-primary text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                  </span>
                 </div>
                 <p className="text-body-md text-on-surface-variant mt-2 max-w-xl">
                   Your vitals and reported symptoms are within your baseline range. No urgent interventions are required from your clinical team at this time.
                 </p>
               </div>
-              <div className="grid grid-cols-3 gap-gutter w-full lg:w-auto">
-                <div className="text-center"><p className="text-label-caps text-on-surface-variant">Activity</p><p className="text-headline-md font-headline-md text-primary">84<span className="text-body-sm">%</span></p></div>
-                <div className="text-center"><p className="text-label-caps text-on-surface-variant">Sleep</p><p className="text-headline-md font-headline-md text-secondary">7.2<span className="text-body-sm">h</span></p></div>
-                <div className="text-center"><p className="text-label-caps text-on-surface-variant">Resting HR</p><p className="text-headline-md font-headline-md text-on-surface">72 <span className="text-body-sm">bpm</span></p></div>
+              <div className="relative grid grid-cols-3 gap-4 w-full lg:w-auto lg:gap-8">
+                <div className="text-center card-lift p-3 rounded-xl">
+                  <p className="text-label-caps text-on-surface-variant">Activity</p>
+                  <p className="text-headline-md font-headline-md text-primary">84<span className="text-body-sm">%</span></p>
+                </div>
+                <div className="text-center card-lift p-3 rounded-xl">
+                  <p className="text-label-caps text-on-surface-variant">Sleep</p>
+                  <p className="text-headline-md font-headline-md text-secondary">7.2<span className="text-body-sm">h</span></p>
+                </div>
+                <div className="text-center card-lift p-3 rounded-xl">
+                  <p className="text-label-caps text-on-surface-variant">Resting HR</p>
+                  <p className="text-headline-md font-headline-md text-on-surface">72 <span className="text-body-sm">bpm</span></p>
+                </div>
               </div>
             </div>
           </section>

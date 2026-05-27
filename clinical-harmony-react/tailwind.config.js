@@ -2,12 +2,20 @@
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
-  // Dynamic class names ( `bg-${tone}`, `text-${tone}` ) won't be picked up by
-  // the JIT scanner, so list them explicitly.
+  // Dynamic class names ( `bg-${tone}`, `text-${tone}`, `bg-${tone}-container/40` )
+  // won't be picked up by the JIT scanner, so list them explicitly.
   safelist: [
     'bg-primary', 'bg-secondary', 'bg-tertiary', 'bg-error', 'bg-status-safe', 'bg-status-monitor',
     'text-primary', 'text-secondary', 'text-tertiary', 'text-error', 'text-status-safe', 'text-status-monitor',
-    'border-primary', 'border-secondary', 'border-error', 'border-status-monitor'
+    'border-primary', 'border-secondary', 'border-error', 'border-status-monitor',
+    // Container & opacity variants used in Landing feature cards & dashboard tone chips
+    {
+      pattern: /(bg|text|border|ring)-(primary|secondary|tertiary)(-container)?(\/(5|10|15|20|25|30|40|50|60|70|80|90))?/,
+      variants: ['hover', 'group-hover', 'focus', 'group-open']
+    },
+    {
+      pattern: /(bg|text)-(status-safe|status-monitor|error)(-container)?(\/(10|20|30|40|50|60))?/
+    }
   ],
   theme: {
     extend: {
