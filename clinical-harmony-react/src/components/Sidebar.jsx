@@ -1,11 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 
 const NAV = [
-  { to: '/',         id: 'dashboard', icon: 'dashboard',        label: 'Dashboard' },
-  { to: '/log',      id: 'log',       icon: 'monitor_heart',    label: 'Symptom Log' },
-  { to: '/history',  id: 'history',   icon: 'insights',         label: 'Pattern History' },
-  { to: '/chat',     id: 'chat',      icon: 'medical_services', label: 'Clinical Team' },
-  { to: '/report',   id: 'report',    icon: 'description',      label: 'Physician Report' }
+  { to: '/dashboard', id: 'dashboard', icon: 'dashboard',        label: 'Dashboard' },
+  { to: '/log',       id: 'log',       icon: 'monitor_heart',    label: 'Symptom Log' },
+  { to: '/history',   id: 'history',   icon: 'insights',         label: 'Pattern History' },
+  { to: '/chat',      id: 'chat',      icon: 'medical_services', label: 'Clinical Team' },
+  { to: '/report',    id: 'report',    icon: 'description',      label: 'Physician Report' }
 ];
 
 export default function Sidebar() {
@@ -13,7 +13,7 @@ export default function Sidebar() {
   return (
     <aside className="h-screen w-64 fixed left-0 top-0 flex flex-col py-unit px-stack-md bg-surface-container-low/85 backdrop-blur-md shadow-sm z-50">
       <div className="mb-stack-md px-unit pt-stack-sm">
-        <NavLink to="/" className="flex items-center gap-2 text-primary">
+        <NavLink to="/dashboard" className="flex items-center gap-2 text-primary">
           <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>spa</span>
           <h1 className="text-headline-md font-headline-md font-bold">Clinical Harmony</h1>
         </NavLink>
@@ -32,7 +32,7 @@ export default function Sidebar() {
           <NavLink
             key={item.id}
             to={item.to}
-            end={item.to === '/'}
+            end
             className={({ isActive }) =>
               'flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg transition-colors group ' +
               (isActive

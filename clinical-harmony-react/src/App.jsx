@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import ScrollEffects from './components/ScrollEffects.jsx';
+import Landing from './pages/Landing.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import SymptomLog from './pages/SymptomLog.jsx';
 import History from './pages/History.jsx';
@@ -11,12 +12,13 @@ export default function App() {
     <>
       <ScrollEffects />
       <Routes>
-        <Route path="/"        element={<Dashboard />} />
-        <Route path="/log"     element={<SymptomLog />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/report"  element={<Report />} />
-        <Route path="/chat"    element={<Chat />} />
-        <Route path="*"        element={<Dashboard />} />
+        <Route path="/"          element={<Landing />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/log"       element={<SymptomLog />} />
+        <Route path="/history"   element={<History />} />
+        <Route path="/report"    element={<Report />} />
+        <Route path="/chat"      element={<Chat />} />
+        <Route path="*"          element={<Landing />} />
       </Routes>
     </>
   );

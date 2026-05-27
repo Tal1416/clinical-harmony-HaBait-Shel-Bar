@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function TopNav({ title, activeTab = 'my-care' }) {
   const tabs = [
-    { id: 'my-care',   label: 'My Care',   to: '/' },
+    { id: 'my-care',   label: 'My Care',   to: '/dashboard' },
     { id: 'team-chat', label: 'Team Chat', to: '/chat' }
   ];
   return (
