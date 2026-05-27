@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Clinical Team Chat · Clinical Harmony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="assets/theme.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  /* Chat needs to fill viewport below sticky header */
+  body { overflow: hidden; }
+  .chat-shell { height: calc(100vh - 64px); }
+</style>
+</head>
+<body class="font-body-md">
+
+<main class="ml-64 flex flex-col">
+  <div class="chat-shell flex overflow-hidden">
+
+    <!-- Care team list -->
+    <section class="w-72 bg-surface-container-low border-r border-outline-variant flex flex-col">
+      <div class="p-gutter">
+        <h2 class="text-headline-sm font-headline-sm mb-stack-md">Care Team</h2>
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-sm">search</span>
+          <input id="team-search" class="w-full bg-surface-container-highest border-none rounded-xl py-2 pl-10 pr-3 text-body-sm focus:ring-2 focus:ring-primary" placeholder="Search team..."/>
+        </div>
+      </div>
+      <div class="flex-1 overflow-y-auto px-stack-sm pb-stack-md space-y-1" id="team-list">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="p-gutter border-t border-surface-variant">
+        <a href="report.html" class="flex items-center gap-2 text-primary font-bold text-label-caps hover:underline">
+          <span class="material-symbols-outlined text-base">description</span> SEND REPORT
+        </a>
+      </div>
+    </section>
+
+    <!-- Chat thread -->
+    <section class="flex-1 flex flex-col bg-surface relative min-w-0">
+      <div class="p-stack-md sm:p-gutter bg-surface/80 backdrop-blur-md border-b border-surface-variant flex items-center justify-between">
+        <div class="flex items-center gap-stack-md min-w-0">
+          <div class="w-10 h-10 rounded-full bg-primary-container/40 flex items-center justify-center text-primary font-bold shrink-0">AT</div>
+          <div class="min-w-0">
+            <h2 class="text-headline-sm font-headline-sm truncate" id="active-name">Dr. Aris Thorne</h2>
+            <p class="text-body-sm text-primary flex items-center gap-1">
+              <span class="w-2 h-2 bg-status-safe rounded-full"></span>
+              <span id="active-role">Online · Lead Endocrinologist</span>
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-1">
+          <button class="p-2 hover:bg-surface-variant rounded-full transition"><span class="material-symbols-outlined">call</span></button>
+          <button class="p-2 hover:bg-surface-variant rounded-full transition"><span class="material-symbols-outlined">videocam</span></button>
+          <button class="p-2 hover:bg-surface-variant rounded-full transition"><span class="material-symbols-outlined">info</span></button>
+        </div>
+      </div>
+
+      <div id="chat-container" class="flex-1 overflow-y-auto p-gutter space-y-stack-lg scroll-smooth">
+        <div class="flex justify-center">
+          <span class="text-label-caps font-label-caps bg-surface-container px-3 py-1 rounded-full text-on-surface-variant">Today</span>
+        </div>
+
+        <div class="flex items-end gap-3 max-w-[80%]">
+          <div class="w-8 h-8 rounded-full bg-primary-container/40 flex items-center justify-center text-primary text-xs font-bold shrink-0">AT</div>
+          <div>
+            <div class="bg-surface-container-high p-4 rounded-2xl rounded-bl-none clinical-shadow">
+              <p class="text-body-md">Good morning Sarah. I've been reviewing your glucose levels from the last 48 hours. How have you been feeling after the afternoon meals?</p>
+            </div>
+            <p class="text-[10px] text-on-surface-variant mt-1 ml-1">09:12 AM</p>
+          </div>
+        </div>
+
+        <div class="flex items-end justify-end gap-3 ml-auto max-w-[80%]">
+          <div class="text-right">
+            <div class="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none clinical-shadow">
+              <p class="text-body-md">Hi Dr. Thorne. I've been feeling a bit more fatigued around 4 PM. I logged the symptoms in the tracker. Sending the report now.</p>
+            </div>
+            <div class="flex items-center justify-end gap-1 mt-1 mr-1">
+              <p class="text-[10px] text-on-surface-variant">09:15 AM</p>
+              <span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings:'FILL' 1;">done_all</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-end justify-end gap-3 ml-auto max-w-[80%]">
+          <div class="w-full">
+            <div class="bg-surface-container-highest border border-primary/20 p-4 rounded-2xl clinical-shadow card-lift">
+              <div class="flex items-center gap-4 mb-3">
+                <div class="w-10 h-10 bg-primary-container/30 rounded-xl flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary">assessment</span>
+                </div>
+                <div>
+                  <h4 class="font-bold text-body-md">Symptom Log Report</h4>
+                  <p class="text-body-sm text-on-surface-variant">Oct 21 – Oct 23, 2026</p>
+                </div>
+              </div>
+              <div class="bg-white/60 rounded-lg p-3 space-y-2 mb-4">
+                <div class="flex justify-between text-body-sm">
+                  <span>Avg. Fatigue Level</span>
+                  <span class="font-bold text-error">Moderate (6/10)</span>
+                </div>
+                <div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-error h-full" style="width:60%"></div>
+                </div>
+              </div>
+              <a href="report.html" class="block text-center w-full py-2 bg-primary text-on-primary rounded-lg text-body-sm font-bold hover:opacity-90 transition">View Detailed Log</a>
+            </div>
+            <p class="text-[10px] text-on-surface-variant mt-1 text-right mr-1">09:16 AM · Seen</p>
+          </div>
+        </div>
+
+        <div class="flex items-end gap-3" id="typing-indicator">
+          <div class="w-8 h-8 rounded-full bg-primary-container/40 flex items-center justify-center text-primary text-xs font-bold shrink-0">AT</div>
+          <div class="bg-surface-container-high px-4 py-3 rounded-2xl rounded-bl-none flex gap-1">
+            <span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full bounce-dot" style="animation-delay:0s;"></span>
+            <span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full bounce-dot" style="animation-delay:.2s;"></span>
+            <span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full bounce-dot" style="animation-delay:.4s;"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input area -->
+      <div class="p-stack-md sm:p-gutter bg-surface border-t border-surface-variant">
+        <div class="flex flex-wrap items-center gap-3 mb-3">
+          <a href="log.html" class="inline-flex items-center gap-2 p-2 px-3 hover:bg-primary-container/10 text-primary rounded-xl transition border border-primary/20">
+            <span class="material-symbols-outlined text-sm">share_reviews</span>
+            <span class="text-body-sm font-bold">Share Symptom Log</span>
+          </a>
+          <a href="report.html" class="inline-flex items-center gap-2 p-2 px-3 hover:bg-primary-container/10 text-primary rounded-xl transition border border-primary/20">
+            <span class="material-symbols-outlined text-sm">description</span>
+            <span class="text-body-sm font-bold">Send Report</span>
+          </a>
+        </div>
+        <form id="msg-form" class="flex items-end gap-3 bg-surface-container-high p-2 rounded-2xl">
+          <button type="button" class="p-2 text-on-surface-variant hover:text-primary transition">
+            <span class="material-symbols-outlined">add_circle</span>
+          </button>
+          <textarea id="msg-input" rows="1" class="flex-1 bg-transparent border-none focus:ring-0 text-body-md py-2 resize-none max-h-32 placeholder:text-on-surface-variant" placeholder="Type a message safely..."></textarea>
+          <button type="button" class="p-2 text-on-surface-variant hover:text-primary transition">
+            <span class="material-symbols-outlined">mood</span>
+          </button>
+          <button type="submit" class="bg-primary text-on-primary p-2 rounded-xl flex items-center justify-center hover:scale-105 active:scale-95 duration-150 transition" aria-label="Send">
+            <span class="material-symbols-outlined">send</span>
+          </button>
+        </form>
+        <p class="text-[10px] text-center mt-2 text-on-surface-variant opacity-70 flex items-center justify-center gap-1">
+          <span class="material-symbols-outlined text-[12px]">lock</span>
+          All clinical communications are end-to-end encrypted and HIPAA compliant.
+        </p>
+      </div>
+    </section>
+
+    <!-- Provider details -->
+    <aside class="hidden xl:flex w-80 bg-surface-container border-l border-outline-variant p-gutter flex-col gap-stack-lg overflow-y-auto">
+      <div>
+        <h3 class="text-label-caps font-label-caps text-on-surface-variant mb-stack-md">Primary Provider</h3>
+        <div class="text-center bg-white p-stack-lg rounded-2xl clinical-shadow border border-outline-variant/30">
+          <div class="w-24 h-24 rounded-full bg-primary-container/40 mx-auto mb-4 flex items-center justify-center text-primary font-bold text-2xl border-4 border-primary/10">AT</div>
+          <h4 class="text-headline-sm font-headline-sm">Dr. Aris Thorne</h4>
+          <p class="text-body-sm text-primary mb-4">Board Certified Endocrinologist</p>
+          <div class="flex justify-center gap-3">
+            <button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition"><span class="material-symbols-outlined text-primary text-sm">mail</span></button>
+            <button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition"><span class="material-symbols-outlined text-primary text-sm">phone_enabled</span></button>
+            <button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition"><span class="material-symbols-outlined text-primary text-sm">calendar_month</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-stack-md">
+        <h3 class="text-label-caps font-label-caps text-on-surface-variant">Upcoming Appointment</h3>
+        <div class="bg-secondary-container/30 border border-secondary/20 p-4 rounded-xl">
+          <div class="flex items-center gap-3 mb-2">
+            <span class="material-symbols-outlined text-secondary">video_chat</span>
+            <span class="text-body-sm font-bold">Virtual Follow-up</span>
+          </div>
+          <p class="text-headline-sm font-headline-sm">Oct 26, 2026</p>
+          <p class="text-body-sm text-on-surface-variant">10:30 AM – 11:00 AM</p>
+          <button class="mt-3 text-secondary text-body-sm font-bold flex items-center gap-1 hover:underline">
+            Add to Calendar <span class="material-symbols-outlined text-sm">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="space-y-stack-md">
+        <h3 class="text-label-caps font-label-caps text-on-surface-variant">Quick Actions</h3>
+        <div class="grid grid-cols-1 gap-2">
+          <button class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition group">
+            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">pill</span>
+            <span class="text-body-sm">Refill Request</span>
+          </button>
+          <a href="report.html" class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition group">
+            <span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">folder_shared</span>
+            <span class="text-body-sm">Clinical Documents</span>
+          </a>
+          <button class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-error-container/40 transition group">
+            <span class="material-symbols-outlined text-error">emergency</span>
+            <span class="text-body-sm text-error font-bold">Emergency Protocol</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<script>
+  window.PAGE = { id: 'chat', title: 'Clinical Team Chat', activeTab: 'team-chat' };
+</script>
+<script src="assets/shell.js"></script>
+<script>
+  // Care team data
+  const TEAM = [
+    { initials: 'AT', name: 'Dr. Aris Thorne',  role: 'Lead Endocrinologist',     last: "I've reviewed your latest log...", time: '2m',  online: true,  active: true },
+    { initials: 'NS', name: 'Nurse Sarah',       role: 'Care Nurse',                last: 'The medication adjustments are…',   time: '1h',  online: true },
+    { initials: 'LC', name: 'Liam Chen',         role: 'Care Coordinator',          last: 'Your appointment next week is confirmed.', time: 'Yesterday', online: false },
+    { initials: 'HV', name: 'Dr. Helena Vance',  role: 'Attending Physician',       last: 'Please review the lab panel results.', time: 'Mon', online: false },
+    { initials: 'MR', name: 'Maya Rivera, PT',   role: 'Physical Therapist',        last: 'Exercises updated for this week.',  time: 'Sun', online: false }
+  ];
+
+  const teamList = document.getElementById('team-list');
+  function renderTeam(filter = '') {
+    const f = filter.trim().toLowerCase();
+    teamList.innerHTML = '';
+    TEAM.filter(p => !f || p.name.toLowerCase().includes(f) || p.role.toLowerCase().includes(f)).forEach((p, i) => {
+      const isActive = p.active;
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = (isActive
+        ? 'w-full p-3 bg-surface-variant rounded-xl flex items-center gap-3 cursor-pointer text-left'
+        : 'w-full p-3 hover:bg-surface-container rounded-xl flex items-center gap-3 cursor-pointer transition-colors text-left');
+      card.innerHTML = `
+        <div class="relative shrink-0">
+          <div class="w-12 h-12 rounded-full bg-primary-container/40 flex items-center justify-center text-primary font-bold">${p.initials}</div>
+          ${p.online ? '<span class="absolute bottom-0 right-0 w-3 h-3 bg-status-safe border-2 border-white rounded-full"></span>' : ''}
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex justify-between items-baseline gap-2">
+            <h3 class="text-body-md ${isActive ? 'font-bold' : ''} truncate">${p.name}</h3>
+            <span class="text-xs text-on-surface-variant shrink-0">${p.time}</span>
+          </div>
+          <p class="text-body-sm text-on-surface-variant truncate">${p.last}</p>
+        </div>`;
+      card.addEventListener('click', () => {
+        TEAM.forEach(t => t.active = false);
+        p.active = true;
+        document.getElementById('active-name').textContent = p.name;
+        document.getElementById('active-role').textContent = (p.online ? 'Online · ' : 'Offline · ') + p.role;
+        renderTeam(document.getElementById('team-search').value);
+      });
+      teamList.appendChild(card);
+    });
+  }
+  renderTeam();
+  document.getElementById('team-search').addEventListener('input', e => renderTeam(e.target.value));
+
+  // Send messages
+  const chat = document.getElementById('chat-container');
+  const input = document.getElementById('msg-input');
+  const form  = document.getElementById('msg-form');
+  const typing = document.getElementById('typing-indicator');
+
+  function scrollDown() { chat.scrollTop = chat.scrollHeight; }
+  window.addEventListener('load', scrollDown);
+
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(128, input.scrollHeight) + 'px';
+  });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.dispatchEvent(new Event('submit', { cancelable: true }));
+    }
+  });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = ''; input.style.height = 'auto';
+
+    const div = document.createElement('div');
+    div.className = 'flex items-end justify-end gap-3 ml-auto max-w-[80%] opacity-0 translate-y-2 transition-all duration-300';
+    const now = new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+    div.innerHTML = `
+      <div class="text-right">
+        <div class="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none clinical-shadow">
+          <p class="text-body-md">${msg.replace(/</g, '&lt;')}</p>
+        </div>
+        <div class="flex items-center justify-end gap-1 mt-1 mr-1">
+          <p class="text-[10px] text-on-surface-variant">${now}</p>
+          <span class="material-symbols-outlined text-[12px] text-primary">done</span>
+        </div>
+      </div>`;
+    chat.insertBefore(div, typing);
+    requestAnimationFrame(() => div.classList.remove('opacity-0', 'translate-y-2'));
+    scrollDown();
+
+    // Simulated reply
+    typing.style.display = 'flex';
+    setTimeout(() => {
+      typing.style.display = 'none';
+      const reply = document.createElement('div');
+      reply.className = 'flex items-end gap-3 max-w-[80%] opacity-0 translate-y-2 transition-all duration-300';
+      const replyTime = new Date().toLocaleTimeString('en-US', { hour:'2-digit', minute:'2-digit' });
+      reply.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-primary-container/40 flex items-center justify-center text-primary text-xs font-bold shrink-0">AT</div>
+        <div>
+          <div class="bg-surface-container-high p-4 rounded-2xl rounded-bl-none clinical-shadow">
+            <p class="text-body-md">Thanks Sarah — noted. I'll review the latest log and follow up by end of day.</p>
+          </div>
+          <p class="text-[10px] text-on-surface-variant mt-1 ml-1">${replyTime}</p>
+        </div>`;
+      chat.insertBefore(reply, typing);
+      requestAnimationFrame(() => reply.classList.remove('opacity-0', 'translate-y-2'));
+      scrollDown();
+    }, 1400);
+  });
+</script>
+</body>
+</html>

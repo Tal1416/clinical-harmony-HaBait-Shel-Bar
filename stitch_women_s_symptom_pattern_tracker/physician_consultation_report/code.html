@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Physician Export - Clinical Harmony</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "inverse-surface": "#2e3132",
+                  "surface-container": "#eceeef",
+                  "surface-container-low": "#f2f4f5",
+                  "inverse-on-surface": "#eff1f2",
+                  "secondary": "#5f5982",
+                  "outline-variant": "#bdc9ca",
+                  "surface-variant": "#e1e3e4",
+                  "error-container": "#ffdad6",
+                  "on-primary": "#ffffff",
+                  "primary": "#006168",
+                  "error": "#ba1a1a",
+                  "tertiary-fixed": "#e4e1ea",
+                  "inverse-primary": "#7cd4dd",
+                  "on-primary-fixed": "#002022",
+                  "surface-container-high": "#e7e8e9",
+                  "on-secondary-fixed-variant": "#474269",
+                  "tertiary-fixed-dim": "#c8c5ce",
+                  "primary-fixed-dim": "#7cd4dd",
+                  "surface-container-lowest": "#ffffff",
+                  "on-secondary-container": "#5b557d",
+                  "primary-container": "#0d7c84",
+                  "secondary-fixed": "#e5deff",
+                  "surface-dim": "#d8dadb",
+                  "on-secondary": "#ffffff",
+                  "on-primary-container": "#d9fcff",
+                  "surface-container-highest": "#e1e3e4",
+                  "primary-fixed": "#98f1f9",
+                  "surface": "#f8f9fa",
+                  "on-surface-variant": "#3e494a",
+                  "on-tertiary": "#ffffff",
+                  "on-error": "#ffffff",
+                  "secondary-fixed-dim": "#c9c1f0",
+                  "on-tertiary-fixed": "#1b1b21",
+                  "secondary-container": "#d4ccfc",
+                  "outline": "#6e797a",
+                  "surface-tint": "#006970",
+                  "tertiary-container": "#706f77",
+                  "on-primary-fixed-variant": "#004f54",
+                  "background": "#f8f9fa",
+                  "on-tertiary-container": "#f7f3fc",
+                  "on-error-container": "#93000a",
+                  "on-tertiary-fixed-variant": "#46464d",
+                  "on-secondary-fixed": "#1c163b",
+                  "on-background": "#191c1d",
+                  "surface-bright": "#f8f9fa",
+                  "on-surface": "#191c1d",
+                  "tertiary": "#57575e"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "unit": "8px",
+                  "container-padding-mobile": "16px",
+                  "container-padding-desktop": "40px",
+                  "stack-md": "16px",
+                  "gutter": "24px",
+                  "stack-lg": "32px",
+                  "stack-sm": "8px"
+          },
+          "fontFamily": {
+                  "label-caps": ["Atkinson Hyperlegible Next"],
+                  "data-mono": ["Atkinson Hyperlegible Next"],
+                  "body-lg": ["Atkinson Hyperlegible Next"],
+                  "headline-md": ["Manrope"],
+                  "headline-sm": ["Manrope"],
+                  "body-md": ["Atkinson Hyperlegible Next"],
+                  "body-sm": ["Atkinson Hyperlegible Next"],
+                  "headline-lg": ["Manrope"]
+          },
+          "fontSize": {
+                  "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                  "data-mono": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .clinical-shadow {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+    .print-canvas {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+    }
+    @media print {
+      body * { visibility: hidden; }
+      .print-canvas, .print-canvas * { visibility: visible; }
+      .print-canvas { position: absolute; left: 0; top: 0; margin: 0; padding: 20mm; }
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface shadow-sm flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Clinical Harmony</span>
+</div>
+<div class="flex items-center gap-3 px-4 mb-8">
+<img alt="Patient profile avatar" class="w-10 h-10 rounded-full border border-surface-variant" data-alt="A professional medical profile portrait of a woman in her 30s with a calm, friendly expression. She is set against a clean, soft-lit background with a palette of whites and teals, matching a high-end clinical aesthetic. The lighting is bright and even, conveying a sense of reliability and empathetic healthcare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAormgwDLnTqj_b2Jc_7SlCevHY8vhQOo2ey5gy3vBy8GcQv9B7KNEOM4cSacigNdqIsN-xU8Ou0ScUYfVoh1lcw0o4x9uKOMoOktkj9SdH9pVctNBLdpH96aERS_5ezfhEx6zdft56ucimhNlfTSG8ftCJkA7oXt_uvKYQhDhiw8QhoepTW4rCSXd2UHl8VOaGH0btZYWLFg0mlIBLOv3JLZdhQa_Xuv9LN4QGZcmiJ-1DANBe8wHWtg588lzB2Pz9nrNa99Yc5NY"/>
+<div>
+<p class="text-label-caps font-label-caps text-on-surface">Sarah Mitchell</p>
+<p class="text-body-sm text-on-surface-variant">Patient ID: WH-9821</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="font-label-caps">Symptom Log</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-variant/30" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-caps">Clinical Team</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-caps">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-2 pt-8 border-t border-surface-variant">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-10 py-4 ml-64 bg-surface sticky top-0 z-40 border-b border-surface-variant">
+<div class="flex items-center gap-8">
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">Physician Export</h1>
+<nav class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">My Care</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Team Chat</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-caps flex items-center gap-2 clinical-shadow hover:opacity-90 transition-all active:scale-95" onclick="window.print()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 20">picture_as_pdf</span>
+        Export PDF
+      </button>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">emergency_home</span>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 p-10 bg-surface min-h-[calc(100vh-72px)]">
+<div class="max-w-5xl mx-auto space-y-8">
+<!-- Report Preview Container -->
+<section class="bg-surface-container-lowest clinical-shadow rounded-xl overflow-hidden border border-surface-variant">
+<div class="print-canvas">
+<!-- Report Header -->
+<div class="flex justify-between items-start border-b-2 border-primary pb-8 mb-8">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface mb-2">Patient Clinical Summary</h2>
+<p class="text-body-md text-on-surface-variant uppercase tracking-wider">Report generated on Oct 24, 2023 • 09:15 AM</p>
+</div>
+<div class="text-right">
+<p class="font-bold text-primary text-headline-sm">Clinical Harmony</p>
+<p class="text-body-sm text-on-surface-variant">Protocol v2.4.1</p>
+</div>
+</div>
+<!-- Bento Grid Layout for Report Content -->
+<div class="grid grid-cols-12 gap-8">
+<!-- 1. Suspicious Patterns (Quick Scan) -->
+<div class="col-span-12 lg:col-span-7 space-y-6">
+<div class="p-6 bg-surface-container-low rounded-lg border-l-4 border-error">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-error">warning</span>
+<h3 class="text-headline-sm font-headline-sm">Suspicious Patterns</h3>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-error mt-2"></div>
+<p class="text-body-md"><span class="font-bold">Circadian Shift:</span> Symptom onset has shifted 4 hours earlier (from 16:00 to 12:00) over the last 7 days.</p>
+</div>
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-error mt-2"></div>
+<p class="text-body-md"><span class="font-bold">Intensity Escalation:</span> Self-reported pain levels peaked at 8/10 for 3 consecutive days, exceeding the 30-day baseline.</p>
+</div>
+<div class="flex gap-4">
+<div class="w-2 h-2 rounded-full bg-secondary mt-2"></div>
+<p class="text-body-md"><span class="font-bold">Medication Correlation:</span> Recorded "Dizziness" events occurred 45 minutes post-medication intake on 5 occasions.</p>
+</div>
+</div>
+</div>
+<!-- 3. Top Concerns -->
+<div class="p-6 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">psychology</span>
+<h3 class="text-headline-sm font-headline-sm">Patient's Top Concerns</h3>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="p-4 bg-white rounded border border-surface-variant">
+<p class="text-label-caps text-primary mb-1">Primary Worry</p>
+<p class="text-body-md italic">"I am worried about my ability to stay focused at work during the late afternoon fatigue spikes."</p>
+</div>
+<div class="p-4 bg-white rounded border border-surface-variant">
+<p class="text-label-caps text-primary mb-1">Functional Goal</p>
+<p class="text-body-md">Wants to resume light jogging (2 miles) without significant joint inflammation the following day.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Symptom Frequency Chart (Visual Scan) -->
+<div class="col-span-12 lg:col-span-5 flex flex-col h-full">
+<div class="p-6 bg-white border border-surface-variant rounded-lg flex-1">
+<h3 class="text-headline-sm font-headline-sm mb-6">30-Day Frequency</h3>
+<div class="space-y-6">
+<!-- Simulated Chart -->
+<div class="h-48 flex items-end justify-between gap-1">
+<div class="w-full bg-primary/20 h-1/4 rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-1/3 rounded-t-sm"></div>
+<div class="w-full bg-primary/20 h-1/2 rounded-t-sm"></div>
+<div class="w-full bg-primary/40 h-2/3 rounded-t-sm"></div>
+<div class="w-full bg-primary/40 h-1/2 rounded-t-sm"></div>
+<div class="w-full bg-primary/60 h-3/4 rounded-t-sm"></div>
+<div class="w-full bg-primary h-full rounded-t-sm"></div>
+<div class="w-full bg-primary/80 h-4/5 rounded-t-sm"></div>
+<div class="w-full bg-primary/60 h-2/3 rounded-t-sm"></div>
+<div class="w-full bg-primary/40 h-1/2 rounded-t-sm"></div>
+</div>
+<div class="flex justify-between text-label-caps text-on-surface-variant">
+<span>30 Days Ago</span>
+<span>Today</span>
+</div>
+<div class="space-y-4 pt-4 border-t border-surface-variant">
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-bold">Fatigue</span>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-body-sm font-data-mono">24 Entries</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-bold">Joint Pain</span>
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-body-sm font-data-mono">18 Entries</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-sm font-bold">Migraine</span>
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded text-body-sm font-data-mono">8 Entries</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Information -->
+<div class="mt-12 pt-8 border-t border-surface-variant grid grid-cols-3 gap-8">
+<div>
+<p class="text-label-caps text-on-surface-variant">Attending Physician</p>
+<p class="text-body-md font-bold">Dr. Helena Vance</p>
+</div>
+<div>
+<p class="text-label-caps text-on-surface-variant">Verification Hash</p>
+<p class="text-body-sm font-data-mono">CH-8829-XJ-01</p>
+</div>
+<div class="text-right">
+<p class="text-body-sm text-on-surface-variant">Confidential Patient Information. For Clinical Use Only.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Actions -->
+<div class="flex justify-end gap-4 pb-20">
+<button class="px-6 py-3 border-2 border-primary text-primary rounded-lg font-headline-sm hover:bg-primary/5 transition-all">
+          Modify Date Range
+        </button>
+<button class="px-10 py-3 bg-primary text-on-primary rounded-lg font-headline-sm shadow-lg hover:opacity-90 transition-all flex items-center gap-3">
+<span class="material-symbols-outlined">send</span>
+          Send to EHR
+        </button>
+</div>
+</div>
+</main>
+<script>
+    // Simple hover effect for "chart" bars
+    document.querySelectorAll('.h-48 div').forEach(bar => {
+      bar.addEventListener('mouseenter', () => {
+        bar.style.filter = 'brightness(0.9)';
+      });
+      bar.addEventListener('mouseleave', () => {
+        bar.style.filter = 'none';
+      });
+    });
+  </script>
+</body></html>

@@ -1,0 +1,228 @@
+/* Clinical Harmony — shared styles. The “calm room” aesthetic. */
+
+:root {
+  --primary: #006168;
+  --on-primary: #ffffff;
+  --surface: #f8f9fa;
+  --on-surface: #191c1d;
+  --surface-variant: #e1e3e4;
+  --error: #ba1a1a;
+  --secondary: #5f5982;
+  --tertiary: #57575e;
+  --primary-fixed: #98f1f9;
+  --secondary-container: #d4ccfc;
+  --scroll: 0;        /* 0 → 1 across the page (set by JS) */
+  --scroll-px: 0px;   /* scrollY in px */
+}
+
+html { scroll-behavior: smooth; background: var(--surface); }
+html, body { color: var(--on-surface); }
+/* Body must be transparent so the fixed z-index:-1 gradient backdrop shows. */
+body { background: transparent; font-family: "Atkinson Hyperlegible Next", system-ui, sans-serif; }
+
+/* ────────────────────────────────────────────────────────────
+   Animated gradient backdrop
+   Three softly drifting radial blobs in the brand palette.
+   Sits behind everything (z=-1) and never blocks pointer events.
+   ──────────────────────────────────────────────────────────── */
+.gradient-bg {
+  position: fixed; inset: 0; z-index: -1;
+  pointer-events: none; overflow: hidden;
+  background:
+    radial-gradient(closest-side at var(--bg-x1, 18%) var(--bg-y1, 22%),
+      rgba(0, 97, 104, .18), transparent 70%),
+    radial-gradient(closest-side at var(--bg-x2, 82%) var(--bg-y2, 30%),
+      rgba(124, 212, 221, .25), transparent 70%),
+    radial-gradient(closest-side at var(--bg-x3, 60%) var(--bg-y3, 85%),
+      rgba(212, 204, 252, .35), transparent 72%),
+    linear-gradient(180deg, #f8f9fa 0%, #f2f4f5 100%);
+  background-size: 120% 120%, 120% 120%, 120% 120%, 100% 100%;
+  animation: gradientDrift 22s ease-in-out infinite alternate;
+  filter: saturate(1.05);
+}
+@keyframes gradientDrift {
+  0%   { --bg-x1: 18%; --bg-y1: 22%; --bg-x2: 82%; --bg-y2: 30%; --bg-x3: 60%; --bg-y3: 85%; }
+  33%  { --bg-x1: 28%; --bg-y1: 60%; --bg-x2: 70%; --bg-y2: 18%; --bg-x3: 40%; --bg-y3: 70%; }
+  66%  { --bg-x1: 12%; --bg-y1: 78%; --bg-x2: 88%; --bg-y2: 55%; --bg-x3: 72%; --bg-y3: 90%; }
+  100% { --bg-x1: 22%; --bg-y1: 30%; --bg-x2: 78%; --bg-y2: 70%; --bg-x3: 50%; --bg-y3: 60%; }
+}
+/* Older browsers without CSS custom-property animation get a slower hue rotate. */
+@property --bg-x1 { syntax: '<percentage>'; inherits: false; initial-value: 18%; }
+@property --bg-y1 { syntax: '<percentage>'; inherits: false; initial-value: 22%; }
+@property --bg-x2 { syntax: '<percentage>'; inherits: false; initial-value: 82%; }
+@property --bg-y2 { syntax: '<percentage>'; inherits: false; initial-value: 30%; }
+@property --bg-x3 { syntax: '<percentage>'; inherits: false; initial-value: 60%; }
+@property --bg-y3 { syntax: '<percentage>'; inherits: false; initial-value: 85%; }
+
+/* Subtle scroll-driven parallax on the backdrop */
+.gradient-bg::after {
+  content: "";
+  position: absolute; inset: -20%;
+  background:
+    radial-gradient(closest-side at 30% 50%, rgba(152, 241, 249, .25), transparent 60%),
+    radial-gradient(closest-side at 75% 70%, rgba(95, 89, 130, .15),  transparent 60%);
+  transform: translate3d(0, calc(var(--scroll-px) * -0.06), 0);
+  filter: blur(40px);
+}
+
+/* Scroll progress bar fixed at top */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 60;
+  width: calc(var(--scroll) * 100%);
+  background: linear-gradient(90deg, #006168, #7cd4dd 45%, #c9c1f0 90%);
+  box-shadow: 0 0 12px rgba(0, 97, 104, .35);
+  transition: width .08s linear;
+}
+
+/* Animated gradient text — used by .gradient-text or any h1.gradient-text */
+.gradient-text {
+  background: linear-gradient(90deg, #006168, #0d7c84 30%, #5f5982 65%, #006168);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent;
+  animation: gradientPan 8s linear infinite;
+}
+@keyframes gradientPan {
+  0%   { background-position:   0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Reveal on scroll (handled by IntersectionObserver in shell.js) */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .7s cubic-bezier(.22,.61,.36,1),
+              transform .7s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal[data-reveal="left"]  { transform: translateX(-24px); }
+.reveal[data-reveal="left"].in  { transform: translateX(0); }
+.reveal[data-reveal="right"] { transform: translateX(24px); }
+.reveal[data-reveal="right"].in { transform: translateX(0); }
+.reveal[data-reveal="scale"] { transform: scale(.96); }
+.reveal[data-reveal="scale"].in { transform: scale(1); }
+
+/* Stagger children when the parent has [data-reveal-group] */
+[data-reveal-group].in > .reveal { transition-delay: 0s; }
+[data-reveal-group].in > .reveal:nth-child(1) { transition-delay: .04s; }
+[data-reveal-group].in > .reveal:nth-child(2) { transition-delay: .12s; }
+[data-reveal-group].in > .reveal:nth-child(3) { transition-delay: .20s; }
+[data-reveal-group].in > .reveal:nth-child(4) { transition-delay: .28s; }
+[data-reveal-group].in > .reveal:nth-child(5) { transition-delay: .36s; }
+[data-reveal-group].in > .reveal:nth-child(6) { transition-delay: .44s; }
+
+/* Animated gradient ring (used on the dashboard hero) */
+.gradient-ring {
+  position: relative; isolation: isolate;
+}
+.gradient-ring::before {
+  content: ""; position: absolute; inset: -2px; border-radius: inherit;
+  background: conic-gradient(from var(--ring-angle, 0deg),
+    #006168, #7cd4dd, #c9c1f0, #5f5982, #006168);
+  filter: blur(1px); opacity: .55; z-index: -1;
+  animation: ringSpin 14s linear infinite;
+}
+@property --ring-angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+@keyframes ringSpin { to { --ring-angle: 360deg; } }
+
+/* Reduced motion — kill the kinetic stuff */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-bg, .gradient-text, .gradient-ring::before { animation: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  user-select: none;
+}
+
+/* Card lift micro-interaction */
+.card-lift { transition: transform .25s ease, box-shadow .25s ease; }
+.card-lift:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -8px rgba(0,0,0,.08); }
+
+/* Fade in entrance */
+.fade-in { animation: fadeIn .6s ease-out both; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Status bars on cards */
+.status-card-stable { border-left: 4px solid #006168; }
+.status-card-alert  { border-left: 4px solid #ba1a1a; }
+.status-card-monitor{ border-left: 4px solid #a36b00; }
+
+/* Severity slider */
+.severity-slider {
+  -webkit-appearance: none;
+  width: 100%; height: 8px;
+  background: #eceeef; border-radius: 9999px; outline: none;
+}
+.severity-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px;
+  background: var(--primary);
+  cursor: pointer; border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,.1);
+}
+.severity-slider::-moz-range-thumb {
+  width: 24px; height: 24px;
+  background: var(--primary);
+  cursor: pointer; border-radius: 50%;
+  border: 4px solid #ffffff;
+}
+.severity-gradient {
+  background: linear-gradient(to right, #4ade80, #facc15, #f87171);
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Clinical shadow (Level 1 surfaces) */
+.clinical-shadow {
+  box-shadow: 0 4px 12px -4px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.04);
+}
+
+/* Heatmap grid */
+.grid-cols-30 { display: grid; grid-template-columns: repeat(30, minmax(0, 1fr)); }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: #2e3132; color: #eff1f2;
+  padding: 12px 20px; border-radius: 12px; opacity: 0;
+  box-shadow: 0 12px 28px -8px rgba(0,0,0,.25);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 100; font-size: 14px;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Print mode (report) */
+@media print {
+  aside, header, .no-print { display: none !important; }
+  main { margin-left: 0 !important; padding: 0 !important; }
+  body { background: #ffffff; }
+  .print-canvas { box-shadow: none; border: none; }
+}
+
+/* Bento grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+/* Typing dot animation */
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: translateY(0); opacity: .4; }
+  40% { transform: translateY(-4px); opacity: 1; }
+}
+.bounce-dot { animation: bounce-dot 1.2s infinite ease-in-out both; }

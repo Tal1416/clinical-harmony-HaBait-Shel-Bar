@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Symptom Logger · Clinical Harmony</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<script src="assets/theme.js"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="font-body-md overflow-x-hidden">
+
+<main class="ml-64 p-container-padding-desktop min-h-screen">
+  <div class="max-w-[1200px] mx-auto">
+
+    <section class="mb-stack-lg fade-in">
+      <h3 class="text-headline-lg font-headline-lg text-on-surface">How are you feeling, Sarah?</h3>
+      <p class="text-body-lg text-on-surface-variant">Log your daily wellness and symptoms to help your clinical team provide personalized care.</p>
+    </section>
+
+    <form id="log-form" class="grid grid-cols-12 gap-gutter">
+
+      <!-- Left column -->
+      <div class="col-span-12 lg:col-span-8 space-y-stack-lg">
+
+        <!-- 1. Category -->
+        <div class="bg-surface-container-lowest rounded-xl p-stack-lg border border-surface-container clinical-shadow fade-in" style="animation-delay:.05s;">
+          <h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">category</span> 1. Select Category
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-stack-md" id="category-grid">
+            <button type="button" data-cat="pain"     data-icon="bolt"           class="cat-btn flex flex-col items-center justify-center p-stack-md rounded-xl border-2 transition-all">
+              <span class="material-symbols-outlined text-3xl mb-1">bolt</span><span class="font-body-sm font-bold">Pain</span>
+            </button>
+            <button type="button" data-cat="digestive"data-icon="gastroenterology"class="cat-btn flex flex-col items-center justify-center p-stack-md rounded-xl border-2 transition-all">
+              <span class="material-symbols-outlined text-3xl mb-1">gastroenterology</span><span class="font-body-sm font-bold">Digestive</span>
+            </button>
+            <button type="button" data-cat="mood"     data-icon="mood"           class="cat-btn flex flex-col items-center justify-center p-stack-md rounded-xl border-2 transition-all">
+              <span class="material-symbols-outlined text-3xl mb-1">mood</span><span class="font-body-sm font-bold">Mood</span>
+            </button>
+            <button type="button" data-cat="neuro"    data-icon="psychology"     class="cat-btn flex flex-col items-center justify-center p-stack-md rounded-xl border-2 transition-all">
+              <span class="material-symbols-outlined text-3xl mb-1">psychology</span><span class="font-body-sm font-bold">Neurological</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Body map -->
+        <div class="bg-surface-container-lowest rounded-xl border border-surface-container clinical-shadow overflow-hidden flex flex-col md:flex-row fade-in" style="animation-delay:.1s;">
+          <div class="w-full md:w-1/2 p-stack-lg flex flex-col justify-center">
+            <h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">accessibility_new</span> 2. Target Area
+            </h4>
+            <p class="text-body-md text-on-surface-variant mb-stack-md">Tap a body region to mark where the symptom is felt.</p>
+            <div class="space-y-unit" id="region-list">
+              <!-- Filled by JS -->
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 bg-surface-container relative min-h-[280px] flex items-center justify-center p-stack-lg">
+            <svg id="body-map" viewBox="0 0 200 360" class="h-72">
+              <!-- Head -->
+              <circle data-region="head" cx="100" cy="40" r="26" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Neck -->
+              <rect data-region="neck" x="92" y="62" width="16" height="20" rx="6" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Torso -->
+              <rect data-region="chest" x="60" y="82" width="80" height="70" rx="14" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Abdomen -->
+              <rect data-region="abdomen" x="62" y="150" width="76" height="60" rx="14" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Pelvis -->
+              <rect data-region="pelvic" x="64" y="208" width="72" height="40" rx="14" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Legs -->
+              <rect data-region="legs" x="68" y="248" width="28" height="100" rx="12" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <rect data-region="legs-r" x="104" y="248" width="28" height="100" rx="12" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <!-- Arms -->
+              <rect data-region="arms" x="30" y="86" width="22" height="90" rx="10" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+              <rect data-region="arms-r" x="148" y="86" width="22" height="90" rx="10" fill="#006168" fill-opacity=".12" stroke="#006168" stroke-opacity=".3" stroke-width="2" class="cursor-pointer transition-all"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- 3. Severity + details -->
+        <div class="bg-surface-container-lowest rounded-xl p-stack-lg border border-surface-container clinical-shadow space-y-stack-lg fade-in" style="animation-delay:.15s;">
+          <div>
+            <h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center justify-between">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">thermostat</span> 3. Severity Level
+              </span>
+              <span class="text-headline-sm font-bold text-primary" id="severity-value">4</span>
+            </h4>
+            <div class="relative h-12 flex items-center px-2">
+              <div class="absolute inset-x-0 h-2 top-1/2 -translate-y-1/2 rounded-full severity-gradient opacity-25"></div>
+              <input class="severity-slider relative z-10" id="severity-input" type="range" min="1" max="10" value="4"/>
+            </div>
+            <div class="flex justify-between text-label-caps text-on-surface-variant mt-2 px-1">
+              <span>Mild</span><span>Moderate</span><span>Severe</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+            <div>
+              <label class="block text-label-caps mb-stack-sm text-on-surface-variant">Duration</label>
+              <div class="flex gap-2">
+                <input id="duration-amount" class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0" placeholder="2" type="number" min="0"/>
+                <select id="duration-unit" class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0">
+                  <option>Hours</option><option>Minutes</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label class="block text-label-caps mb-stack-sm text-on-surface-variant">Frequency</label>
+              <select id="frequency" class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0">
+                <option>Intermittent</option><option>Constant</option><option>Worsening over time</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-label-caps mb-stack-sm text-on-surface-variant">Clinical Notes & Observations</label>
+            <textarea id="notes" class="w-full min-h-[120px] rounded-lg border border-outline-variant bg-surface p-4 focus:border-primary focus:ring-0" placeholder="Describe any triggers, food, sleep changes, or unusual observations..."></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-primary text-on-primary h-14 rounded-xl font-bold text-body-lg hover:bg-primary-container transition flex items-center justify-center gap-2 shadow-lg shadow-primary/20 active:scale-[.98]">
+            <span class="material-symbols-outlined">save</span> Log Symptom Entry
+          </button>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="col-span-12 lg:col-span-4 space-y-stack-lg">
+        <div class="bg-secondary-container/30 rounded-xl p-stack-lg border border-secondary-container/50 fade-in" style="animation-delay:.1s;">
+          <h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary" style="font-variation-settings:'FILL' 1;">bolt</span> Quick Log
+          </h4>
+          <p class="text-body-sm text-on-secondary-container mb-stack-md">One-tap log for recurring symptoms.</p>
+          <div class="space-y-stack-sm">
+            <button type="button" class="quick-log w-full flex items-center justify-between p-stack-md bg-white rounded-lg border border-secondary-container/30 hover:border-secondary transition-all clinical-shadow group" data-name="Abdominal Cramp" data-icon="water_drop">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined">water_drop</span>
+                </span>
+                <div class="text-left">
+                  <p class="font-bold text-on-surface">Abdominal Cramp</p>
+                  <p class="text-label-caps text-on-surface-variant">Last log: 2 days ago</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-secondary">add_circle</span>
+            </button>
+            <button type="button" class="quick-log w-full flex items-center justify-between p-stack-md bg-white rounded-lg border border-secondary-container/30 hover:border-secondary transition-all clinical-shadow group" data-name="Morning Nausea" data-icon="electric_bolt">
+              <div class="flex items-center gap-3">
+                <span class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined">electric_bolt</span>
+                </span>
+                <div class="text-left">
+                  <p class="font-bold text-on-surface">Morning Nausea</p>
+                  <p class="text-label-caps text-on-surface-variant">Last log: Yesterday</p>
+                </div>
+              </div>
+              <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-secondary">add_circle</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card rounded-2xl border border-white/50 p-stack-lg clinical-shadow relative overflow-hidden fade-in" style="animation-delay:.2s;">
+          <div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-2xl"></div>
+          <h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">auto_awesome</span> Clinical Insight
+          </h4>
+          <p class="text-body-md text-on-surface-variant italic border-l-4 border-primary/30 pl-4 py-2">
+            "We've noticed your abdominal pain usually occurs 2 hours after meals. Consider logging your diet in the next step."
+          </p>
+          <div class="mt-stack-md pt-stack-md border-t border-surface-variant flex items-center justify-between">
+            <a href="chat.html" class="text-primary font-bold text-label-caps hover:underline">DISCUSS WITH TEAM →</a>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-highest rounded-xl p-stack-lg fade-in" style="animation-delay:.25s;">
+          <div class="flex justify-between items-center mb-stack-md">
+            <h4 class="font-bold text-on-surface">Recent History</h4>
+            <a href="history.html" class="text-primary font-bold text-label-caps hover:underline">View All</a>
+          </div>
+          <div class="space-y-stack-sm">
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full bg-error"></div>
+              <div class="flex-1"><p class="text-body-sm font-bold">Severe Migraine</p><p class="text-label-caps text-on-surface-variant">Oct 22, 8:30 PM</p></div>
+              <span class="text-body-sm font-data-mono bg-surface px-2 py-0.5 rounded">8/10</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full bg-status-monitor"></div>
+              <div class="flex-1"><p class="text-body-sm font-bold">Lower Back Pain</p><p class="text-label-caps text-on-surface-variant">Oct 21, 2:15 PM</p></div>
+              <span class="text-body-sm font-data-mono bg-surface px-2 py-0.5 rounded">3/10</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-2 h-2 rounded-full bg-primary"></div>
+              <div class="flex-1"><p class="text-body-sm font-bold">Mild Joint Pain</p><p class="text-label-caps text-on-surface-variant">Oct 20, 9:00 AM</p></div>
+              <span class="text-body-sm font-data-mono bg-surface px-2 py-0.5 rounded">2/10</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+
+<!-- Emergency FAB -->
+<a href="chat.html" class="fixed bottom-10 right-10 w-16 h-16 bg-error text-on-error rounded-full clinical-shadow flex items-center justify-center hover:scale-110 active:scale-95 transition group z-50">
+  <span class="material-symbols-outlined text-3xl" style="font-variation-settings:'FILL' 1;">emergency</span>
+  <span class="absolute right-20 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-lg text-label-caps opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap clinical-shadow">Call Care Team</span>
+</a>
+
+<script>
+  window.PAGE = { id: 'log', title: 'Symptom Logger', activeTab: 'my-care' };
+</script>
+<script src="assets/shell.js"></script>
+<script>
+  // --- State
+  const state = {
+    category: 'pain',
+    region: 'abdomen',
+    severity: 4
+  };
+
+  const REGIONS = {
+    head: 'Head', neck: 'Neck', chest: 'Chest', abdomen: 'Abdomen',
+    pelvic: 'Pelvic Area', legs: 'Legs', 'legs-r': 'Legs', arms: 'Arms', 'arms-r': 'Arms'
+  };
+
+  // --- Category toggle
+  const catButtons = document.querySelectorAll('.cat-btn');
+  function paintCategoryButtons() {
+    catButtons.forEach(b => {
+      const active = b.dataset.cat === state.category;
+      b.className = 'cat-btn flex flex-col items-center justify-center p-stack-md rounded-xl border-2 transition-all ' +
+        (active
+          ? 'border-primary bg-primary-container/10 text-primary'
+          : 'border-surface-variant text-on-surface-variant hover:border-primary/50');
+    });
+  }
+  catButtons.forEach(b => b.addEventListener('click', () => {
+    state.category = b.dataset.cat; paintCategoryButtons();
+  }));
+  paintCategoryButtons();
+
+  // --- Body map
+  const bodyMap = document.getElementById('body-map');
+  function normalizeRegion(r) { return r.replace(/-r$/, ''); }
+  function paintBodyMap() {
+    bodyMap.querySelectorAll('[data-region]').forEach(node => {
+      const active = normalizeRegion(node.dataset.region) === state.region;
+      node.setAttribute('fill', '#006168');
+      node.setAttribute('fill-opacity', active ? '.45' : '.12');
+      node.setAttribute('stroke-opacity', active ? '.9' : '.3');
+      node.setAttribute('stroke-width', active ? '3' : '2');
+    });
+    renderRegionList();
+  }
+  function renderRegionList() {
+    const list = document.getElementById('region-list');
+    const distinctRegions = [...new Set(Object.values(REGIONS))];
+    list.innerHTML = distinctRegions.map(name => {
+      const slug = Object.entries(REGIONS).find(([_, v]) => v === name)[0];
+      const active = normalizeRegion(slug) === state.region;
+      return `
+        <div class="flex items-center gap-unit ${active ? 'text-primary' : 'text-on-surface-variant'}">
+          <span class="material-symbols-outlined text-sm">${active ? 'check_circle' : 'radio_button_unchecked'}</span>
+          <span class="text-body-sm ${active ? 'font-bold' : ''}">${name}${active ? ' selected' : ''}</span>
+        </div>`;
+    }).join('');
+  }
+  bodyMap.addEventListener('click', e => {
+    const target = e.target.closest('[data-region]');
+    if (!target) return;
+    state.region = normalizeRegion(target.dataset.region);
+    paintBodyMap();
+  });
+  paintBodyMap();
+
+  // --- Severity
+  const slider = document.getElementById('severity-input');
+  const valueDisplay = document.getElementById('severity-value');
+  slider.addEventListener('input', e => {
+    const val = +e.target.value;
+    state.severity = val;
+    valueDisplay.textContent = val;
+    valueDisplay.classList.remove('text-primary', 'text-status-monitor', 'text-error', 'text-secondary');
+    if (val <= 3) valueDisplay.classList.add('text-primary');
+    else if (val <= 6) valueDisplay.classList.add('text-secondary');
+    else if (val <= 8) valueDisplay.classList.add('text-status-monitor');
+    else valueDisplay.classList.add('text-error');
+  });
+
+  // --- Quick log
+  document.querySelectorAll('.quick-log').forEach(btn => {
+    btn.addEventListener('click', () => {
+      saveSymptom({
+        name: btn.dataset.name,
+        icon: btn.dataset.icon,
+        intensity: 3,
+        tone: 'secondary',
+        when: 'Just now'
+      });
+      toast(`Quick-logged: ${btn.dataset.name}`);
+    });
+  });
+
+  // --- Submit
+  document.getElementById('log-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const catLabel = {pain:'Pain', digestive:'Digestive', mood:'Mood', neuro:'Neurological'}[state.category];
+    const intensity5 = Math.max(1, Math.min(5, Math.ceil(state.severity / 2)));
+    const tone = state.severity <= 3 ? 'primary' : state.severity <= 6 ? 'secondary' : state.severity <= 8 ? 'status-monitor' : 'error';
+    const iconByCat = {pain:'bolt', digestive:'gastroenterology', mood:'mood', neuro:'psychology'}[state.category];
+    saveSymptom({
+      name: `${catLabel} · ${REGIONS[state.region] || state.region}`,
+      icon: iconByCat,
+      intensity: intensity5,
+      severity10: state.severity,
+      tone,
+      when: 'Just now',
+      notes: document.getElementById('notes').value,
+      duration: `${document.getElementById('duration-amount').value || '—'} ${document.getElementById('duration-unit').value}`,
+      frequency: document.getElementById('frequency').value
+    });
+    toast('Symptom entry saved · synced with your clinical team');
+    document.getElementById('notes').value = '';
+    document.getElementById('duration-amount').value = '';
+  });
+
+  function saveSymptom(s) {
+    try {
+      const list = JSON.parse(localStorage.getItem('clinical-harmony.symptoms') || '[]');
+      list.unshift(s);
+      localStorage.setItem('clinical-harmony.symptoms', JSON.stringify(list.slice(0, 50)));
+    } catch (e) { /* ignore */ }
+  }
+</script>
+</body>
+</html>

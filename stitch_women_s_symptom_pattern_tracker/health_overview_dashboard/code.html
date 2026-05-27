@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&amp;family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2e3132",
+                        "surface-container": "#eceeef",
+                        "surface-container-low": "#f2f4f5",
+                        "inverse-on-surface": "#eff1f2",
+                        "secondary": "#5f5982",
+                        "outline-variant": "#bdc9ca",
+                        "surface-variant": "#e1e3e4",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "primary": "#006168",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#e4e1ea",
+                        "inverse-primary": "#7cd4dd",
+                        "on-primary-fixed": "#002022",
+                        "surface-container-high": "#e7e8e9",
+                        "on-secondary-fixed-variant": "#474269",
+                        "tertiary-fixed-dim": "#c8c5ce",
+                        "primary-fixed-dim": "#7cd4dd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#5b557d",
+                        "primary-container": "#0d7c84",
+                        "secondary-fixed": "#e5deff",
+                        "surface-dim": "#d8dadb",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#d9fcff",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed": "#98f1f9",
+                        "surface": "#f8f9fa",
+                        "on-surface-variant": "#3e494a",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed-dim": "#c9c1f0",
+                        "on-tertiary-fixed": "#1b1b21",
+                        "secondary-container": "#d4ccfc",
+                        "outline": "#6e797a",
+                        "surface-tint": "#006970",
+                        "tertiary-container": "#706f77",
+                        "on-primary-fixed-variant": "#004f54",
+                        "background": "#f8f9fa",
+                        "on-tertiary-container": "#f7f3fc",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#46464d",
+                        "on-secondary-fixed": "#1c163b",
+                        "on-background": "#191c1d",
+                        "surface-bright": "#f8f9fa",
+                        "on-surface": "#191c1d",
+                        "tertiary": "#57575e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-padding-mobile": "16px",
+                        "container-padding-desktop": "40px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "stack-lg": "32px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Atkinson Hyperlegible Next"],
+                        "data-mono": ["Atkinson Hyperlegible Next"],
+                        "body-lg": ["Atkinson Hyperlegible Next"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-sm": ["Manrope"],
+                        "body-md": ["Atkinson Hyperlegible Next"],
+                        "body-sm": ["Atkinson Hyperlegible Next"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "data-mono": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #191c1d;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .status-card-stable { border-left: 4px solid #006168; }
+        .status-card-alert { border-left: 4px solid #ba1a1a; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface shadow-sm flex flex-col h-full py-unit px-stack-md z-50">
+<div class="mb-stack-lg px-unit">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Clinical Harmony</h1>
+</div>
+<nav class="flex-grow flex flex-col gap-unit">
+<!-- Active Tab -->
+<a class="flex items-center gap-stack-md p-unit rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-variant/30 hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-caps font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-stack-md p-unit rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+<span class="text-label-caps font-label-caps">Symptom Log</span>
+</a>
+<a class="flex items-center gap-stack-md p-unit rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="text-label-caps font-label-caps">Clinical Team</span>
+</a>
+<a class="flex items-center gap-stack-md p-unit rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="text-label-caps font-label-caps">Resources</span>
+</a>
+<a class="flex items-center gap-stack-md p-unit rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-stack-lg border-t border-surface-variant">
+<button class="w-full bg-primary text-on-primary py-stack-md rounded-xl font-bold text-label-caps mb-stack-lg active:scale-95 transition-transform">
+                Log Symptom
+            </button>
+<div class="flex flex-col gap-unit">
+<a class="flex items-center gap-stack-md p-unit text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="text-label-caps font-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-stack-md p-unit text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="text-label-caps font-label-caps">Sign Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="flex justify-between items-center w-full px-container-padding-desktop py-stack-sm ml-64 sticky top-0 bg-surface z-40 border-b border-surface-variant">
+<div class="flex items-center gap-stack-lg">
+<h2 class="text-headline-sm font-headline-sm font-bold text-primary">Patient Dashboard</h2>
+<nav class="hidden md:flex gap-stack-md">
+<a class="text-primary border-b-2 border-primary pb-1 font-bold text-body-md" href="#">My Care</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Team Chat</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-lg">
+<div class="relative flex items-center bg-surface-container rounded-full px-stack-md py-1">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-48" placeholder="Search records..." type="text"/>
+</div>
+<div class="flex gap-stack-md items-center">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-error hover:bg-error-container p-2 rounded-full transition-colors" data-icon="emergency_home">emergency_home</button>
+<div class="flex items-center gap-stack-sm ml-2 border-l pl-4 border-surface-variant">
+<div class="text-right">
+<p class="text-body-sm font-bold">Sarah Mitchell</p>
+<p class="text-label-caps text-on-surface-variant opacity-70">WH-9821</p>
+</div>
+<img alt="Patient profile avatar" class="w-10 h-10 rounded-full object-cover ring-2 ring-primary-container" data-alt="A professional headshot of a middle-aged woman with a friendly expression, soft studio lighting against a clean neutral background. The visual style is polished and empathetic, reflecting a patient profile in a high-end medical software interface with a serene teal and soft white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDloNDwbBpCH0o_R1tmf-hgS0xd9MMEkr9rcUt84WnE-_jHpjONm4DVYpsb7irZ8tL4Udy4JO1nhFV_PxU6gsOa1U8Enb9pGHWbsmueLA8r3WnUhF0JWvwqA7-lC-_xfIEaYV1idBUCd94A9Dj6DF7SzLS7yd1NOQkt6Ui6LnkPw4Yb0ZHgzFn87iMeHOdZ0s2Zmh7drbsQ05F-axncNQF1EOL3NupudXW8huZu4xTcnSjRok45tuPfPEPzoF780QpNTKd10lT7HFU"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 p-container-padding-desktop">
+<div class="max-w-7xl mx-auto space-y-gutter">
+<!-- Hero Section / Health Status -->
+<section class="fade-in">
+<div class="bg-surface-container-lowest p-stack-lg rounded-xl shadow-sm border-l-4 border-primary flex items-center justify-between">
+<div>
+<span class="text-label-caps text-primary uppercase tracking-widest">Global Health Status</span>
+<div class="flex items-center gap-unit mt-1">
+<h3 class="text-headline-lg font-headline-lg text-on-surface">Stable</h3>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<p class="text-body-md text-on-surface-variant mt-2 max-w-xl">
+                            Your vitals and reported symptoms are currently within your baseline range. No urgent interventions are required from your clinical team at this time.
+                        </p>
+</div>
+<div class="flex gap-gutter">
+<div class="text-center">
+<p class="text-label-caps text-on-surface-variant">Activity Level</p>
+<p class="text-headline-md text-primary">84%</p>
+</div>
+<div class="text-center">
+<p class="text-label-caps text-on-surface-variant">Sleep Quality</p>
+<p class="text-headline-md text-secondary">7.2h</p>
+</div>
+<div class="text-center">
+<p class="text-label-caps text-on-surface-variant">Heart Rate</p>
+<p class="text-headline-md text-error">72 <span class="text-body-sm">bpm</span></p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Layout Content -->
+<div class="bento-grid">
+<!-- AI Insights Card (Large Span) -->
+<div class="col-span-12 lg:col-span-8 bg-white p-gutter rounded-xl shadow-sm border border-surface-variant/50 flex flex-col gap-stack-lg fade-in" style="animation-delay: 0.1s;">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-primary bg-primary-container/20 p-2 rounded-lg" data-icon="psychology">psychology</span>
+<h3 class="text-headline-sm font-headline-sm">AI Health Patterns</h3>
+</div>
+<span class="text-label-caps text-on-surface-variant bg-surface-variant px-3 py-1 rounded-full">Last 7 Days</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="bg-surface-container-low p-stack-md rounded-lg space-y-2">
+<div class="flex justify-between items-start">
+<p class="font-bold text-body-md text-on-surface">Increased Fatigue</p>
+<span class="material-symbols-outlined text-secondary" data-icon="trending_up">trending_up</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">3-day trend identified. Reported energy levels are 15% lower than your 30-day average, often correlating with late-night activity.</p>
+<div class="w-full bg-surface-variant h-1.5 rounded-full mt-4">
+<div class="bg-secondary h-1.5 rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-lg space-y-2">
+<div class="flex justify-between items-start">
+<p class="font-bold text-body-md text-on-surface">Medication Adherence</p>
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+</div>
+<p class="text-body-sm text-on-surface-variant">Perfect consistency maintained over the last 14 days. Your physiological response shows improved stabilization as a result.</p>
+<div class="flex gap-1 mt-4">
+<div class="h-2 w-full bg-primary rounded-full"></div>
+<div class="h-2 w-full bg-primary rounded-full"></div>
+<div class="h-2 w-full bg-primary rounded-full"></div>
+<div class="h-2 w-full bg-primary rounded-full"></div>
+<div class="h-2 w-full bg-primary rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="relative h-48 w-full bg-surface-container-lowest rounded-xl border border-dashed border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="Health trend data visualization" class="absolute inset-0 w-full h-full object-cover opacity-20" data-alt="A clean, minimalist data visualization dashboard showing smooth line graphs and soft area charts. The color palette uses professional clinical teal, muted lavender, and soft greys. The lighting is bright and airy, conveying a sense of clarity and modern medical precision in a patient-facing interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwZy5rXhFb-ELYfJ-aTNsfltwtkOpQPJwQZxj79-gmNOVU6atx2tG5x1W_7zkR_hBOr1AqgbZScyvJI1t-ounv0DKREAj-6gz7I3hs6X_sGIPsQo04sXmZUBUwjKnAtoDG2z6l-stlf0rAJHQjW-Ry4exmSrao7tvzrfHRiWvGKaFoQ4r7ZmqDg_gDAyMJ3yNMNM_GlWjD6NNO_eou8XxPrYxR2NVymdooj7iHVlv3OpUdAyFUWgf6vCMsHS6vE2JVl0VWLzvCSvk"/>
+<div class="z-10 text-center px-gutter">
+<span class="material-symbols-outlined text-primary text-4xl mb-2" data-icon="analytics">analytics</span>
+<p class="text-body-md font-bold text-on-surface">Comprehensive Symptom Correlation</p>
+<p class="text-body-sm text-on-surface-variant">Tap to expand 30-day cross-analysis</p>
+</div>
+</div>
+</div>
+<!-- Upcoming Clinical Actions (Vertical Span) -->
+<div class="col-span-12 lg:col-span-4 bg-white p-gutter rounded-xl shadow-sm border border-surface-variant/50 fade-in" style="animation-delay: 0.2s;">
+<div class="flex items-center gap-stack-md mb-stack-lg">
+<span class="material-symbols-outlined text-secondary bg-secondary-container/20 p-2 rounded-lg" data-icon="calendar_today">calendar_today</span>
+<h3 class="text-headline-sm font-headline-sm">Clinical Actions</h3>
+</div>
+<div class="space-y-stack-md">
+<div class="group flex gap-stack-md p-stack-md hover:bg-surface-container-low rounded-xl transition-all border border-transparent hover:border-surface-variant">
+<div class="bg-primary-container/20 text-primary w-12 h-12 rounded-lg flex flex-col items-center justify-center shrink-0">
+<span class="text-label-caps font-bold">OCT</span>
+<span class="text-headline-sm -mt-1">12</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Cardiology Telehealth</p>
+<p class="text-body-sm text-on-surface-variant">Dr. Aris Thorne • 10:30 AM</p>
+<button class="mt-2 text-primary font-bold text-label-caps hover:underline">JOIN CALL</button>
+</div>
+</div>
+<div class="group flex gap-stack-md p-stack-md hover:bg-surface-container-low rounded-xl transition-all border border-transparent hover:border-surface-variant">
+<div class="bg-secondary-container/20 text-secondary w-12 h-12 rounded-lg flex flex-col items-center justify-center shrink-0">
+<span class="text-label-caps font-bold">OCT</span>
+<span class="text-headline-sm -mt-1">15</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Lab Blood Work</p>
+<p class="text-body-sm text-on-surface-variant">City General Labs • 08:00 AM</p>
+<p class="text-label-caps text-secondary mt-1">FASTING REQUIRED</p>
+</div>
+</div>
+<div class="group flex gap-stack-md p-stack-md hover:bg-surface-container-low rounded-xl transition-all border border-transparent hover:border-surface-variant">
+<div class="bg-surface-variant text-on-surface-variant w-12 h-12 rounded-lg flex flex-col items-center justify-center shrink-0">
+<span class="text-label-caps font-bold">OCT</span>
+<span class="text-headline-sm -mt-1">20</span>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Symptom Review</p>
+<p class="text-body-sm text-on-surface-variant">Self-guided logging task</p>
+</div>
+</div>
+</div>
+<button class="w-full mt-stack-lg border border-primary text-primary py-stack-md rounded-xl font-bold text-label-caps hover:bg-primary/5 transition-colors">
+                        VIEW FULL SCHEDULE
+                    </button>
+</div>
+<!-- Latest Symptoms (Bottom Row) -->
+<div class="col-span-12 lg:col-span-12 bg-white p-gutter rounded-xl shadow-sm border border-surface-variant/50 fade-in" style="animation-delay: 0.3s;">
+<div class="flex justify-between items-center mb-stack-lg">
+<div class="flex items-center gap-stack-md">
+<span class="material-symbols-outlined text-error bg-error-container/20 p-2 rounded-lg" data-icon="history">history</span>
+<h3 class="text-headline-sm font-headline-sm">Latest Logged Symptoms</h3>
+</div>
+<a class="text-primary font-bold text-label-caps hover:underline flex items-center gap-1" href="#">
+                            LOG HISTORY <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="p-stack-md rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-caps text-on-surface-variant">Yesterday, 8:45 PM</span>
+<span class="material-symbols-outlined text-primary" data-icon="flare">flare</span>
+</div>
+<div>
+<p class="text-body-md font-bold">Mild Joint Pain</p>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex gap-0.5">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<div class="w-3 h-3 rounded-full bg-surface-variant"></div>
+</div>
+<span class="text-label-caps text-on-surface-variant">Intensity 2/5</span>
+</div>
+</div>
+</div>
+<div class="p-stack-md rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-caps text-on-surface-variant">Yesterday, 2:15 PM</span>
+<span class="material-symbols-outlined text-secondary" data-icon="device_thermostat">device_thermostat</span>
+</div>
+<div>
+<p class="text-body-md font-bold">Dizziness</p>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex gap-0.5">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<div class="w-3 h-3 rounded-full bg-surface-variant"></div>
+<div class="w-3 h-3 rounded-full bg-surface-variant"></div>
+</div>
+<span class="text-label-caps text-on-surface-variant">Intensity 1/5</span>
+</div>
+</div>
+</div>
+<div class="p-stack-md rounded-xl bg-surface-container-lowest border border-surface-variant flex flex-col justify-between h-32">
+<div class="flex justify-between items-start">
+<span class="text-label-caps text-on-surface-variant">Oct 10, 11:00 AM</span>
+<span class="material-symbols-outlined text-error" data-icon="air">air</span>
+</div>
+<div>
+<p class="text-body-md font-bold">Shortness of Breath</p>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex gap-0.5">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<div class="w-3 h-3 rounded-full bg-error"></div>
+</div>
+<span class="text-label-caps text-on-surface-variant">Intensity 3/5</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-center border-2 border-dashed border-surface-variant rounded-xl group cursor-pointer hover:bg-surface-variant/20 transition-colors">
+<div class="text-center">
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors" data-icon="add_circle">add_circle</span>
+<p class="text-label-caps text-outline font-bold mt-1 group-hover:text-primary transition-colors">LOG NEW</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB - Only for Dashboard -->
+<button class="fixed bottom-gutter right-gutter bg-primary text-on-primary w-14 h-14 rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all flex items-center justify-center z-50 group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform" data-icon="add">add</span>
+<span class="absolute right-16 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-lg text-label-caps opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap">Quick Log Symptom</span>
+</button>
+<script>
+        // Simple Micro-interaction: Update health summary periodically
+        const statusEl = document.querySelector('h3.text-headline-lg');
+        const phrases = ["Stable", "Optimal", "Recovering"];
+        let i = 0;
+        
+        // This is just to show interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Dashboard Initialized');
+            
+            // Interaction: Shadow lift on cards
+            const cards = document.querySelectorAll('.bg-white');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-2px)';
+                    card.style.boxShadow = '0 10px 25px -5px rgba(0, 0, 0, 0.05)';
+                    card.style.transition = 'all 0.3s ease';
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = 'none';
+                });
+            });
+        });
+    </script>
+</body></html>

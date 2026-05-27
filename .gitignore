@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+build/
+*/dist/
+*/build/
+
+# Vite
+.vite/
+*/.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+*.tsbuildinfo
+.cache/

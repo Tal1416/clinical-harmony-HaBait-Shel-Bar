@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Team Chat - Clinical Harmony</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#e1e3e4",
+                    "on-tertiary-fixed-variant": "#46464d",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-secondary-container": "#5b557d",
+                    "outline-variant": "#bdc9ca",
+                    "on-surface": "#191c1d",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-fixed": "#e4e1ea",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-container": "#eceeef",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#1c163b",
+                    "outline": "#6e797a",
+                    "surface-tint": "#006970",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "primary-container": "#0d7c84",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#d9fcff",
+                    "background": "#f8f9fa",
+                    "on-primary-fixed": "#002022",
+                    "secondary-fixed-dim": "#c9c1f0",
+                    "primary-fixed": "#98f1f9",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-secondary-fixed-variant": "#474269",
+                    "on-surface-variant": "#3e494a",
+                    "on-background": "#191c1d",
+                    "inverse-primary": "#7cd4dd",
+                    "tertiary-container": "#706f77",
+                    "primary-fixed-dim": "#7cd4dd",
+                    "on-tertiary-fixed": "#1b1b21",
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-dim": "#d8dadb",
+                    "surface-container-high": "#e7e8e9",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#d4ccfc",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#f7f3fc",
+                    "tertiary": "#57575e",
+                    "secondary-fixed": "#e5deff",
+                    "tertiary-fixed-dim": "#c8c5ce",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9fa",
+                    "secondary": "#5f5982",
+                    "primary": "#006168"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "gutter": "24px",
+                    "stack-md": "16px",
+                    "stack-lg": "32px",
+                    "container-padding-mobile": "16px",
+                    "container-padding-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Atkinson Hyperlegible Next"],
+                    "label-caps": ["Atkinson Hyperlegible Next"],
+                    "headline-md": ["Manrope"],
+                    "body-sm": ["Atkinson Hyperlegible Next"],
+                    "body-md": ["Atkinson Hyperlegible Next"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "data-mono": ["Atkinson Hyperlegible Next"],
+                    "headline-sm": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "data-mono": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #bdc9ca; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface shadow-sm flex flex-col py-unit px-stack-md z-50">
+<div class="mb-stack-lg">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary px-2 py-4">Clinical Harmony</h1>
+<div class="flex items-center gap-3 px-2 py-3 bg-surface-container rounded-xl">
+<img alt="Patient profile avatar" class="w-10 h-10 rounded-full object-cover" data-alt="A professional close-up portrait of Sarah Mitchell, a woman in her late 30s with a kind and intelligent expression. She is in a softly lit, modern indoor setting with neutral tones and a gentle, natural lighting that emphasizes a clean and trustworthy healthcare environment. The style is professional, high-resolution photography with a shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqDRndh7h5147sDUHeiY6C_js5PlEMVdlp9y2-dBaq3qqi8MulnUlq1Pik7P4N294TmupD8cnI5DgFyLKpp2Tv83gizt353q-sXN8pbGo7NjXRSaA6eoRGkv_QUru2W18ldevrdxBmXVc5if3hfmD-kl6LSUzaWTRxDAyRjRLhd85QxQ_k22Nt6HeP_2mzXo883y3bXH-5IMGQ3HY5ONr0mYeMkUQzI2FX2CKbKsE0nP_5JEcdmenjiZET7m5cxTJ5NQAHtSGfXcQ"/>
+<div>
+<p class="text-label-caps font-label-caps text-on-surface">Sarah Mitchell</p>
+<p class="text-body-sm text-on-surface-variant">WH-9821</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-caps font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="text-label-caps font-label-caps">Symptom Log</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-variant/50 transition-colors group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">medical_services</span>
+<span class="text-label-caps font-label-caps">Clinical Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="text-label-caps font-label-caps">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-3 rounded-xl mb-4 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+<span class="font-bold">Log Symptom</span>
+</button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-label-caps font-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-caps font-label-caps">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopNavBar (Shared Component) -->
+<header class="h-16 flex justify-between items-center w-full px-container-padding-desktop py-stack-sm bg-surface sticky top-0 z-40 border-b border-surface-variant">
+<div class="flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="text-on-surface-variant hover:text-primary-container transition-colors text-body-md" href="#">My Care</a>
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary pb-1 text-body-md font-bold" href="#">Team Chat</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-variant rounded-full cursor-pointer transition-colors">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-variant rounded-full cursor-pointer transition-colors">emergency_home</span>
+<img alt="User profile" class="w-8 h-8 rounded-full cursor-pointer hover:ring-2 ring-primary transition-all" data-alt="A professional close-up portrait of Sarah Mitchell, showing her looking friendly and focused. The background is a blurred high-end medical office environment with soft lighting and a clean, serene aesthetic, dominated by light whites and muted teals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHfBy0PfTS4fJIF_fuMG7zV2ReNf1hxnGS8xFx9gE4U5qwWwsShG0k137VEKYDpL1bZDFNBKQmxqyKG19oP94hdi97XUo_vDPlIKMf8B0cpmj-YfTO5_O4G48VInI0nsYv1bbXb8WmtLvj7GNFaPBgFTN3N_0QTnbGONKgpIaBm3K9SmmSfsgvOd-YD7TpRYg8gV1dR_Y1YbmTYmh3t-NnGllyG2rz1J8pPUOLCci7tzwg6g2-WI0ufreVIaPd1CRQC-FsPdk1dN4"/>
+</div>
+</header>
+<!-- Chat Layout -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Active Care Team Sidebar -->
+<section class="w-80 bg-surface-container-low border-r border-outline-variant flex flex-col">
+<div class="p-gutter">
+<h2 class="text-headline-sm font-headline-sm mb-stack-md">Care Team</h2>
+<div class="relative">
+<input class="w-full bg-surface-container-highest border-none rounded-xl py-2 px-10 text-body-sm focus:ring-2 focus:ring-primary" placeholder="Search team..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-sm">search</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-stack-sm">
+<div class="space-y-1">
+<!-- Active Chat -->
+<div class="p-3 bg-surface-variant rounded-xl flex items-center gap-3 cursor-pointer">
+<div class="relative">
+<img alt="Dr. Aris Thorne" class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a male physician, Dr. Aris Thorne, in a clinical setting. He wears a clean white coat over a professional blue shirt and has a warm, reassuring smile. The background is a soft-focus clinical environment with gentle, high-key lighting, maintaining a modern and trustworthy healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFl7fpxdWRFKPCupYk7g6nNbpvT8wb41o1YAXQiONSzEmloOH89_UaYmnQMiyZWBXOyPBwUFFh83PEwO30Rg3N7A8NoX6UQQ_g4Cdzws2x-fT_S5YjrKDE0rNsdenn7gEHU1JIDiaaDz6wuFOIfufgy2zOthl3DKOYM1TRbdr0xMgIniiabMORsRFUQSE7Q-rSsHQeK6z2ORzOYd_mJezPgTSUGV3pJ-EAnRxMyjC4NYR9tz94xgPd9VM8hW8JfpfliRSHYNvcxzE"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-body-md font-bold truncate">Dr. Aris Thorne</h3>
+<span class="text-xs text-on-surface-variant">2m</span>
+</div>
+<p class="text-body-sm text-on-surface-variant truncate">I've reviewed your latest log...</p>
+</div>
+</div>
+<!-- Other Contacts -->
+<div class="p-3 hover:bg-surface-container rounded-xl flex items-center gap-3 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Nurse Sarah" class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a female nurse, Nurse Sarah, wearing light lavender scrubs. She has a friendly, supportive expression. The setting is a bright, modern medical facility with soft ambient lighting and a clean, high-contrast healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLVPOQ-lDe4ifpzRUqsWJUk_o323vXqNhVjFtmNBlwQp6GRBKbozJKNoMu6o-RW7e2ndOWhi2Mz_CGo-VvjvzQU55IFFZKMCw9NLOdAfKE5c5kkSCfu1fY-adfPCn7RFs-UYPri9vZvbm0efTCuq7ZRv8mjpixNXhC-N2YMJFAk5uirc6MNPR8y7WJEdXsQuce5nK06jRRlyqv7vQxDYW3ST-F-bZq5LpoPzDDjMVON3HXiTotsn0beCthzcKIEjt5qwyodOdKlO0"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-body-md truncate">Nurse Sarah</h3>
+<span class="text-xs text-on-surface-variant">1h</span>
+</div>
+<p class="text-body-sm text-on-surface-variant truncate">The medication adjustments are...</p>
+</div>
+</div>
+<div class="p-3 hover:bg-surface-container rounded-xl flex items-center gap-3 cursor-pointer transition-colors">
+<div class="relative">
+<img alt="Care Coordinator" class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a male care coordinator in a modern office setting. He is wearing a grey blazer and has a helpful, focused appearance. The lighting is soft and even, creating a professional and efficient tone consistent with clinical management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD5eNu2QnTh8xZ__Uva2LQqA0eAScDe_eiHbfkgtyrEZz_Helphr_gHXVfCN1ZVHYKyyVlSKrAIJstkKCJ3u41HU8vc1X7lGmhjTcrPHUNuQ3UKXn0_iwuHDcBxw0KeyIoVBI9p1FmBRahZHlxS8vidv-xZdNUVUQgVwDYPlaDnf79kfZqSbe1hpdXOfdpZJvRE3yrOpHk6uj6ev7urkXsbaLt0mRoSq0MBKE43h8YRl4AUTj4CHIwvPWAUndHRUvgXCiRxe__yQE"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline">
+<h3 class="text-body-md truncate">Liam Chen</h3>
+<span class="text-xs text-on-surface-variant">Yesterday</span>
+</div>
+<p class="text-body-sm text-on-surface-variant truncate">Your appointment for next week is confirmed.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Chat Window -->
+<section class="flex-1 flex flex-col bg-surface relative">
+<!-- Chat Header -->
+<div class="p-gutter bg-surface/80 backdrop-blur-md border-b border-surface-variant flex items-center justify-between">
+<div class="flex items-center gap-4">
+<img alt="Dr. Aris Thorne" class="w-10 h-10 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbYd7UNPZ_j2Rktl6s6Y7Mh7lhilyZ5k3rJH-ptp9z4LT6OrI0i8EDm0BnyU1FcrzoiTqc9pKdm4kW9imqVxTYWte0NWpKeQlq58QGxJuedpF1Ei0mEo0D8RUOM4oOYJhJuKrd-Fb8m7AU4sU6GsLw2z2sDcDI5zaQh3x4LKQtKNv9pLa2zqh_WuEQxLDhb4r0LlHalD5l3aCiVzUOi9ULrXarh-1lUHqk0dOv5geYgGDBCBLIehmwb4cYQ5X5TVrWDGn0cO1ITdg"/>
+<div>
+<h2 class="text-headline-sm font-headline-sm">Dr. Aris Thorne</h2>
+<p class="text-body-sm text-primary flex items-center gap-1">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                Online · Lead Endocrinologist
+                            </p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">call</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">videocam</span></button>
+<button class="p-2 hover:bg-surface-variant rounded-full transition-colors"><span class="material-symbols-outlined">info</span></button>
+</div>
+</div>
+<!-- Chat Messages -->
+<div class="flex-1 overflow-y-auto p-gutter space-y-stack-lg scroll-smooth" id="chat-container">
+<!-- Date Divider -->
+<div class="flex justify-center">
+<span class="text-label-caps font-label-caps bg-surface-container px-3 py-1 rounded-full text-on-surface-variant">Today</span>
+</div>
+<!-- Received Message -->
+<div class="flex items-end gap-3 max-w-[80%]">
+<img class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8PXWgkqnRHzMlbPJpQfVG5rPsm4scftZUweuKIArtRtPqKRVWc-Q9ZVsP43vXWPk9f9FmX2Rlc0xUJr4Xw4_5Hno6WE5URen4-oC0BYGRowv9mlrYpqgxlqUEoCQYSlQwSQD2hgy_BHxruUhODzuYb6kuiOdKb1OTWdFoUUnpq25Z9sF4ZBqiqw0Q2eGohhCwm9HRizbLogjv6fF1Ur2aeXEPLRTgIfhACzd01twu3K7K6pZAMcbhH5gjFKOnGEIWytUAY4Sf-pw"/>
+<div>
+<div class="bg-surface-container-high p-4 rounded-2xl rounded-bl-none shadow-sm">
+<p class="text-body-md">Good morning Sarah. I've been reviewing your glucose levels from the last 48 hours. How have you been feeling after the afternoon meals?</p>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1 ml-1">09:12 AM</p>
+</div>
+</div>
+<!-- Sent Message -->
+<div class="flex items-end justify-end gap-3 ml-auto max-w-[80%]">
+<div class="text-right">
+<div class="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none shadow-md">
+<p class="text-body-md">Hi Dr. Thorne. I've been feeling a bit more fatigued around 4 PM. I've logged the symptoms in the tracker. Sending the report now.</p>
+</div>
+<div class="flex items-center justify-end gap-1 mt-1 mr-1">
+<p class="text-[10px] text-on-surface-variant">09:15 AM</p>
+<span class="material-symbols-outlined text-[12px] text-primary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+</div>
+<!-- Clinical Data Insert (Sent) -->
+<div class="flex items-end justify-end gap-3 ml-auto max-w-[80%]">
+<div class="w-full">
+<div class="bg-surface-container-highest border border-primary/20 p-4 rounded-2xl shadow-sm overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 bg-primary-container/20 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">assessment</span>
+</div>
+<div>
+<h4 class="font-bold text-body-md">Symptom Log Report</h4>
+<p class="text-body-sm text-on-surface-variant">Nov 12 - Nov 14, 2023</p>
+</div>
+</div>
+<div class="bg-white/50 rounded-lg p-3 space-y-2 mb-4">
+<div class="flex justify-between text-body-sm">
+<span>Avg. Fatigue Level</span>
+<span class="font-bold text-error">Moderate (6/10)</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 60%"></div>
+</div>
+</div>
+<button class="w-full py-2 bg-primary text-on-primary rounded-lg text-body-sm font-bold hover:opacity-90 transition-opacity">
+                                    View Detailed Log
+                                </button>
+</div>
+<p class="text-[10px] text-on-surface-variant mt-1 text-right mr-1">09:16 AM · Seen</p>
+</div>
+</div>
+<!-- Received Message (Typing...) -->
+<div class="flex items-end gap-3" id="typing-indicator">
+<img class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjeVg_hhsNiSxa9xEGPQ-O-fgH6lFUVcuiRBIpv2JOL5nk5Z9aNQUX2mD4TMmqouLvOOxmFEXtRp8nHQnl2FotoSY0XXWBb5Q2C0-YskFDQj1oSofebBQYUok79-rtki-SijP4KQBAWI5-0bBVIlOD2xzkYemOJRHJ7a5q5sEoUZ5uL92ibRHqX-RGjdF4Dv2-D2lJ6FYs6mE1hsvPT_u0eHKV6xd7-a7oRH4gUIw_axs30bkEYDdFS2XXiOLAOUGVEQwjtWbo0Ic"/>
+<div class="bg-surface-container-high px-4 py-3 rounded-2xl rounded-bl-none flex gap-1">
+<span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full animate-bounce" style="animation-delay: 0s;"></span>
+<span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+<span class="w-1.5 h-1.5 bg-on-surface-variant rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<div class="p-gutter bg-surface border-t border-surface-variant">
+<div class="flex items-center gap-3 mb-3">
+<button class="p-2 hover:bg-primary-container/10 text-primary rounded-xl flex items-center gap-2 transition-colors border border-primary/20">
+<span class="material-symbols-outlined text-sm">share_reviews</span>
+<span class="text-body-sm font-bold">Share Symptom Log</span>
+</button>
+<button class="p-2 hover:bg-primary-container/10 text-primary rounded-xl flex items-center gap-2 transition-colors border border-primary/20">
+<span class="material-symbols-outlined text-sm">description</span>
+<span class="text-body-sm font-bold">Send Report</span>
+</button>
+</div>
+<div class="flex items-end gap-3 bg-surface-container-high p-2 rounded-2xl">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<textarea class="flex-1 bg-transparent border-none focus:ring-0 text-body-md py-2 resize-none max-h-32" placeholder="Type a message safely..." rows="1"></textarea>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">mood</span>
+</button>
+<button class="bg-primary text-on-primary p-2 rounded-xl flex items-center justify-center hover:scale-95 duration-150 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+<p class="text-[10px] text-center mt-2 text-on-surface-variant opacity-60 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[12px]">lock</span>
+                        All clinical communications are end-to-end encrypted and HIPAA compliant.
+                    </p>
+</div>
+</section>
+<!-- Right Sidebar: Care Team Details -->
+<aside class="w-80 bg-surface-container border-l border-outline-variant p-gutter flex flex-col gap-stack-lg overflow-y-auto">
+<div>
+<h3 class="text-label-caps font-label-caps text-on-surface-variant mb-stack-md">Primary Provider</h3>
+<div class="text-center bg-white p-6 rounded-2xl shadow-sm border border-outline-variant/30">
+<img alt="Dr. Aris Thorne" class="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8vkHp0Wtf4MkOepIEJQRkHxAp5CSHM4iWR-SONGtROI0ay2KYM3sx7fPt7-0gCFod9YcoDEbZUDsQGWy6T1zldURT9N8ONBTgNniWLpSWhTJR3nO-NZ1PPC_EoFjCYOeA8VO-V4KkD6IckFB-LW6h0--hJRzt4dppntqadmAy2DyCsiI8zkHvttqwCiqIde7l7aMs7zX8OtfH6ZA1OfscP0gcSoj9yqHYLEIggdrlrev6WhuWQrocKa6J31LUBo2EZs2GyKzhCBw"/>
+<h4 class="text-headline-sm font-headline-sm">Dr. Aris Thorne</h4>
+<p class="text-body-sm text-primary mb-4">Board Certified Endocrinologist</p>
+<div class="flex justify-center gap-3">
+<button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition-colors"><span class="material-symbols-outlined text-primary text-sm">mail</span></button>
+<button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition-colors"><span class="material-symbols-outlined text-primary text-sm">phone_enabled</span></button>
+<button class="p-2 bg-surface-container rounded-full hover:bg-primary-container/20 transition-colors"><span class="material-symbols-outlined text-primary text-sm">calendar_month</span></button>
+</div>
+</div>
+</div>
+<div class="space-y-stack-md">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant">Upcoming Appointment</h3>
+<div class="bg-secondary-container/30 border border-secondary/20 p-4 rounded-xl">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-secondary">video_chat</span>
+<span class="text-body-sm font-bold">Virtual Follow-up</span>
+</div>
+<p class="text-headline-sm font-headline-sm">Nov 22, 2023</p>
+<p class="text-body-sm text-on-surface-variant">02:30 PM - 03:00 PM</p>
+<button class="mt-3 text-secondary text-body-sm font-bold flex items-center gap-1 hover:underline">
+                            Add to Calendar <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="space-y-stack-md">
+<h3 class="text-label-caps font-label-caps text-on-surface-variant">Quick Actions</h3>
+<div class="grid grid-cols-1 gap-2">
+<button class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">pill</span>
+<span class="text-body-sm">Refill Request</span>
+</button>
+<button class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">folder_shared</span>
+<span class="text-body-sm">Clinical Documents</span>
+</button>
+<button class="flex items-center gap-3 p-3 bg-white rounded-xl border border-outline-variant/30 hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">emergency</span>
+<span class="text-body-sm text-error font-bold">Emergency Protocol</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<script>
+        // Micro-interaction for typing simulation and scrolling
+        const chatContainer = document.getElementById('chat-container');
+        const textarea = document.querySelector('textarea');
+        
+        // Auto-scroll to bottom on load
+        window.onload = () => {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        };
+
+        // Textarea auto-resize
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+        });
+
+        // Simple send animation simulation
+        document.querySelector('button .material-symbols-outlined[innerText="send"]').parentElement.addEventListener('click', () => {
+            if (textarea.value.trim() === '') return;
+            
+            const msg = textarea.value;
+            textarea.value = '';
+            textarea.style.height = 'auto';
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = 'flex items-end justify-end gap-3 ml-auto max-w-[80%] opacity-0 transform translate-y-4 transition-all duration-300';
+            msgDiv.innerHTML = `
+                <div class="text-right">
+                    <div class="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none shadow-md">
+                        <p class="text-body-md">${msg}</p>
+                    </div>
+                    <div class="flex items-center justify-end gap-1 mt-1 mr-1">
+                        <p class="text-[10px] text-on-surface-variant">Just now</p>
+                        <span class="material-symbols-outlined text-[12px] text-primary">done</span>
+                    </div>
+                </div>
+            `;
+            
+            chatContainer.appendChild(msgDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+            
+            setTimeout(() => {
+                msgDiv.classList.remove('opacity-0', 'translate-y-4');
+            }, 10);
+        });
+    </script>
+</body></html>

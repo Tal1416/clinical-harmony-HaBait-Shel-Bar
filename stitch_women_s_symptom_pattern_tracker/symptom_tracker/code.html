@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Symptom Logger | Clinical Harmony</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#2e3132",
+            "surface-container": "#eceeef",
+            "surface-container-low": "#f2f4f5",
+            "inverse-on-surface": "#eff1f2",
+            "secondary": "#5f5982",
+            "outline-variant": "#bdc9ca",
+            "surface-variant": "#e1e3e4",
+            "error-container": "#ffdad6",
+            "on-primary": "#ffffff",
+            "primary": "#006168",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#e4e1ea",
+            "inverse-primary": "#7cd4dd",
+            "on-primary-fixed": "#002022",
+            "surface-container-high": "#e7e8e9",
+            "on-secondary-fixed-variant": "#474269",
+            "tertiary-fixed-dim": "#c8c5ce",
+            "primary-fixed-dim": "#7cd4dd",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-container": "#5b557d",
+            "primary-container": "#0d7c84",
+            "secondary-fixed": "#e5deff",
+            "surface-dim": "#d8dadb",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#d9fcff",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed": "#98f1f9",
+            "surface": "#f8f9fa",
+            "on-surface-variant": "#3e494a",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "secondary-fixed-dim": "#c9c1f0",
+            "on-tertiary-fixed": "#1b1b21",
+            "secondary-container": "#d4ccfc",
+            "outline": "#6e797a",
+            "surface-tint": "#006970",
+            "tertiary-container": "#706f77",
+            "on-primary-fixed-variant": "#004f54",
+            "background": "#f8f9fa",
+            "on-tertiary-container": "#f7f3fc",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#46464d",
+            "on-secondary-fixed": "#1c163b",
+            "on-background": "#191c1d",
+            "surface-bright": "#f8f9fa",
+            "on-surface": "#191c1d",
+            "tertiary": "#57575e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "unit": "8px",
+            "container-padding-mobile": "16px",
+            "container-padding-desktop": "40px",
+            "stack-md": "16px",
+            "gutter": "24px",
+            "stack-lg": "32px",
+            "stack-sm": "8px"
+          },
+          "fontFamily": {
+            "label-caps": ["Atkinson Hyperlegible Next"],
+            "data-mono": ["Atkinson Hyperlegible Next"],
+            "body-lg": ["Atkinson Hyperlegible Next"],
+            "headline-md": ["Manrope"],
+            "headline-lg-mobile": ["Manrope"],
+            "headline-sm": ["Manrope"],
+            "body-md": ["Atkinson Hyperlegible Next"],
+            "body-sm": ["Atkinson Hyperlegible Next"],
+            "headline-lg": ["Manrope"]
+          },
+          "fontSize": {
+            "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+            "data-mono": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .severity-slider {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      background: #eceeef;
+      border-radius: 9999px;
+      outline: none;
+    }
+    .severity-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #006168;
+      cursor: pointer;
+      border-radius: 50%;
+      border: 4px solid #ffffff;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    .severity-gradient {
+      background: linear-gradient(to right, #4ade80, #facc15, #f87171);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- Side Navigation Bar -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col h-full py-unit px-stack-md bg-surface-container-low shadow-sm z-50">
+<div class="mb-stack-lg px-unit">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Clinical Harmony</h1>
+</div>
+<div class="flex items-center gap-stack-md p-stack-sm mb-stack-lg bg-surface-container rounded-xl">
+<img alt="Patient profile avatar" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm" data-alt="A professional, close-up portrait of Sarah Mitchell, a middle-aged woman with a warm and approachable expression. She is in a bright, modern clinical setting with soft natural light streaming in. The image has a clean, high-key aesthetic with a palette of soft teals and whites, emphasizing a calm and professional healthcare environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfMYSvS2szUUh801ZoP7cKM-ln1T4ccsjEnYed_k7gweM3JnpRqZVBiIh8jv21yV-i3bf4xa2CKz98XxHLnOJwa4WgYSfz0PQQSbjTRUdQcqqewi5e4O3E1BN9XsIszJsmoAm_0t4zHVsWHV_pIciJoI0d0UlRZcDbIcMPPPgUxwl87PcJciDrZFCGzqm9JKJnRp1Zv_rFeKBlnsK5nnHR3Gp_9HCaUXN_P4rWHvsrI4ygGR1Yuv5qZ2KWZ5p3SjoxPj-A9X66IT4"/>
+<div>
+<p class="text-body-md font-bold text-on-surface">Sarah Mitchell</p>
+<p class="text-label-caps font-label-caps text-on-surface-variant">Patient ID: WH-9821</p>
+</div>
+</div>
+<nav class="flex-1 space-y-unit">
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-variant/50 transition-opacity" href="#">
+<span class="material-symbols-outlined" data-icon="monitor_heart" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+<span class="font-body-md">Symptom Log</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="font-body-md">Clinical Team</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+<span class="font-body-md">Resources</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-unit border-t border-surface-variant pt-stack-md">
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-body-md">Support</span>
+</a>
+<a class="flex items-center gap-stack-md px-stack-md py-stack-sm rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md px-container-padding-desktop py-stack-sm flex justify-between items-center border-b border-surface-variant">
+<div class="flex items-center gap-stack-lg">
+<h2 class="text-headline-sm font-headline-sm font-bold text-primary">Symptom Logger</h2>
+<nav class="hidden md:flex gap-stack-md">
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md" href="#">My Care</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md" href="#">Team Chat</a>
+</nav>
+</div>
+<div class="flex items-center gap-stack-md">
+<div class="relative flex items-center bg-surface-container-high rounded-full px-4 py-2 w-64">
+<span class="material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full ml-2" placeholder="Search logs..." type="text"/>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="emergency_home">emergency_home</span>
+</button>
+</div>
+</header>
+<div class="p-container-padding-desktop max-w-[1200px] mx-auto">
+<!-- Welcome Section -->
+<section class="mb-stack-lg">
+<h3 class="text-headline-lg font-headline-lg text-on-surface">How are you feeling, Sarah?</h3>
+<p class="text-body-lg text-on-surface-variant">Log your daily wellness and symptoms to help your clinical team provide personalized care.</p>
+</section>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Form Section (Left Column) -->
+<div class="col-span-12 lg:col-span-8 space-y-stack-lg">
+<!-- Category Selection -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-lg border border-surface-container shadow-sm">
+<h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="category">category</span>
+              1. Select Category
+            </h4>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-stack-md">
+<button class="flex flex-col items-center justify-center p-stack-md rounded-xl border-2 border-primary bg-primary-container/10 text-primary transition-all">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="bolt">bolt</span>
+<span class="font-body-sm font-bold">Pain</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md rounded-xl border-2 border-surface-variant hover:border-primary/50 text-on-surface-variant transition-all">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="stomach">gastroenterology</span>
+<span class="font-body-sm">Digestive</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md rounded-xl border-2 border-surface-variant hover:border-primary/50 text-on-surface-variant transition-all">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="mood">mood</span>
+<span class="font-body-sm">Mood</span>
+</button>
+<button class="flex flex-col items-center justify-center p-stack-md rounded-xl border-2 border-surface-variant hover:border-primary/50 text-on-surface-variant transition-all">
+<span class="material-symbols-outlined text-3xl mb-1" data-icon="psychology">psychology</span>
+<span class="font-body-sm">Neurological</span>
+</button>
+</div>
+</div>
+<!-- Body Map Interaction (Asymmetric/Modern Layout) -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-container shadow-sm overflow-hidden flex flex-col md:flex-row h-full">
+<div class="w-full md:w-1/2 p-stack-lg flex flex-col justify-center">
+<h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="accessibility_new">accessibility_new</span>
+                2. Target Area
+              </h4>
+<p class="text-body-md text-on-surface-variant mb-stack-md">Tap the body map to indicate where you're feeling the symptom.</p>
+<div class="space-y-unit">
+<div class="flex items-center gap-unit text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span class="text-body-sm font-bold">Abdomen selected</span>
+</div>
+<div class="flex items-center gap-unit text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="text-body-sm">Lower Back</span>
+</div>
+<div class="flex items-center gap-unit text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="text-body-sm">Pelvic Area</span>
+</div>
+</div>
+</div>
+<div class="w-full md:w-1/2 bg-surface-container relative min-h-[300px] flex items-center justify-center p-stack-lg">
+<div class="w-48 h-full bg-surface-container-high rounded-full overflow-hidden flex items-center justify-center relative">
+<!-- Abstract Body Representation -->
+<div class="w-24 h-64 bg-primary/10 rounded-full relative flex flex-col items-center border-2 border-primary/20">
+<div class="w-12 h-12 bg-primary/20 rounded-full mt-2"></div> <!-- Head -->
+<div class="w-16 h-32 bg-primary/20 rounded-xl mt-2 relative"> <!-- Torso -->
+<!-- Active Indicator -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-primary/40 rounded-full animate-pulse border-2 border-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Severity and Details -->
+<div class="bg-surface-container-lowest rounded-xl p-stack-lg border border-surface-container shadow-sm space-y-stack-lg">
+<div>
+<h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center justify-between">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="thermostat">thermostat</span>
+                  3. Severity Level
+                </span>
+<span class="text-headline-sm font-bold text-primary" id="severity-value">4</span>
+</h4>
+<div class="relative h-12 flex items-center px-2">
+<div class="absolute inset-0 h-2 top-1/2 -translate-y-1/2 rounded-full severity-gradient opacity-20"></div>
+<input class="severity-slider z-10" id="severity-input" max="10" min="1" type="range" value="4"/>
+</div>
+<div class="flex justify-between text-label-caps text-on-surface-variant mt-2 px-1">
+<span>Mild</span>
+<span>Moderate</span>
+<span>Severe</span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-stack-md">
+<div>
+<label class="block text-label-caps mb-stack-sm text-on-surface-variant">Duration (Hrs/Mins)</label>
+<div class="flex gap-2">
+<input class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0" placeholder="2" type="number"/>
+<select class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0">
+<option>Hours</option>
+<option>Minutes</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-label-caps mb-stack-sm text-on-surface-variant">Frequency</label>
+<select class="w-full h-12 rounded-lg border border-outline-variant bg-surface px-4 focus:border-primary focus:ring-0">
+<option>Intermittent</option>
+<option>Constant</option>
+<option>Worsening over time</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-label-caps mb-stack-sm text-on-surface-variant">Clinical Notes &amp; Observations</label>
+<textarea class="w-full min-h-[120px] rounded-lg border border-outline-variant bg-surface p-4 focus:border-primary focus:ring-0" placeholder="Describe any triggers or unusual observations..."></textarea>
+</div>
+<button class="w-full bg-primary text-white h-14 rounded-xl font-bold text-body-lg hover:bg-primary-container transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+              Log Symptom Entry
+            </button>
+</div>
+</div>
+<!-- Sidebar Actions (Right Column) -->
+<div class="col-span-12 lg:col-span-4 space-y-stack-lg">
+<!-- Quick Log Section -->
+<div class="bg-secondary-container/30 rounded-xl p-stack-lg border border-secondary-container/50">
+<h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+              Quick Log
+            </h4>
+<p class="text-body-sm text-on-secondary-container mb-stack-md">One-tap log for recurring symptoms</p>
+<div class="space-y-stack-sm">
+<button class="w-full flex items-center justify-between p-stack-md bg-white rounded-lg border border-secondary-container/30 hover:border-secondary transition-all shadow-sm group">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="water_drop">water_drop</span>
+</span>
+<div class="text-left">
+<p class="font-bold text-on-surface">Abdominal Cramp</p>
+<p class="text-label-caps text-on-surface-variant">Last log: 2 days ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-secondary" data-icon="add_circle">add_circle</span>
+</button>
+<button class="w-full flex items-center justify-between p-stack-md bg-white rounded-lg border border-secondary-container/30 hover:border-secondary transition-all shadow-sm group">
+<div class="flex items-center gap-3">
+<span class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="electric_bolt">electric_bolt</span>
+</span>
+<div class="text-left">
+<p class="font-bold text-on-surface">Morning Nausea</p>
+<p class="text-label-caps text-on-surface-variant">Last log: Yesterday</p>
+</div>
+</div>
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity text-secondary" data-icon="add_circle">add_circle</span>
+</button>
+</div>
+</div>
+<!-- Insight Card (Modern Asymmetric) -->
+<div class="glass-card rounded-2xl border border-white/50 p-stack-lg shadow-xl relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-primary/5 rounded-full blur-2xl"></div>
+<h4 class="text-headline-sm font-headline-sm mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+              Clinical Insight
+            </h4>
+<p class="text-body-md text-on-surface-variant italic border-l-4 border-primary/30 pl-4 py-2">
+              "We've noticed your abdominal pain usually occurs 2 hours after meals. Consider logging your diet in the next step."
+            </p>
+<div class="mt-stack-md pt-stack-md border-t border-surface-variant flex items-center justify-between">
+<div class="flex -space-x-2">
+<img alt="Doctor avatar" class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="A portrait of a professional female doctor with a stethoscope around her neck, smiling warmly in a bright, modern clinic. The lighting is soft and flattering, with a clean aesthetic featuring professional white and teal tones, creating an atmosphere of trust and high-quality healthcare expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0mhVpSAbomZUz4_n9kpDX09BlVTtM8GeEwdx_eUdpRd54-e1sdz_96J12lJuHhUrV6CU5GJ5wXkZjNg-EpOmuIsAGSsWC-r4zJVFDJYO50soOOCM7gUPVyAL6MqNEDf7UgUO-50k80Y5cuMyoKsrlW9kQ9hZZW4OZOg6a0rCajr_l-jmYszZKA5fvkbFTxJDqicPo_KsHKD6qezIW7WEvJ5yIII2QVqbquXsRhpjVp-j-vFEag0vch0N38ZGBlrZrYrkF7pSrbAg"/>
+<div class="w-8 h-8 rounded-full bg-primary-container text-white flex items-center justify-center text-[10px] font-bold border-2 border-white">+2</div>
+</div>
+<span class="text-label-caps text-primary">Reviewing with Team</span>
+</div>
+</div>
+<!-- History Preview -->
+<div class="bg-surface-container-highest rounded-xl p-stack-lg">
+<div class="flex justify-between items-center mb-stack-md">
+<h4 class="font-bold text-on-surface">Recent History</h4>
+<button class="text-primary font-bold text-label-caps">View All</button>
+</div>
+<div class="space-y-stack-sm">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<div class="flex-1">
+<p class="text-body-sm font-bold">Severe Migraine</p>
+<p class="text-label-caps text-on-surface-variant">Oct 24, 8:30 PM</p>
+</div>
+<span class="text-body-sm font-mono bg-surface p-1 rounded">8/10</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+<div class="flex-1">
+<p class="text-body-sm font-bold">Lower Back Pain</p>
+<p class="text-label-caps text-on-surface-variant">Oct 23, 2:15 PM</p>
+</div>
+<span class="text-body-sm font-mono bg-surface p-1 rounded">3/10</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button for Emergency (Contextual Suppression Avoided here as it's a main dashboard area) -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-error text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 group z-50">
+<span class="material-symbols-outlined text-3xl" data-icon="emergency" style="font-variation-settings: 'FILL' 1;">emergency</span>
+<span class="absolute right-20 bg-inverse-surface text-white px-4 py-2 rounded-lg text-label-caps opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-xl">Call Care Team</span>
+</button>
+<script>
+    // Micro-interactions for the severity slider
+    const slider = document.getElementById('severity-input');
+    const valueDisplay = document.getElementById('severity-value');
+    
+    slider.addEventListener('input', (e) => {
+      const val = e.target.value;
+      valueDisplay.textContent = val;
+      
+      // Dynamic color shift for the value display
+      if(val <= 3) {
+        valueDisplay.className = "text-headline-sm font-bold text-green-500 transition-colors";
+      } else if (val <= 7) {
+        valueDisplay.className = "text-headline-sm font-bold text-yellow-500 transition-colors";
+      } else {
+        valueDisplay.className = "text-headline-sm font-bold text-error transition-colors";
+      }
+    });
+
+    // Category button toggling
+    const catButtons = document.querySelectorAll('.grid-cols-2 button, .sm\\:grid-cols-4 button');
+    catButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        catButtons.forEach(b => {
+          b.classList.remove('border-primary', 'bg-primary-container/10', 'text-primary');
+          b.classList.add('border-surface-variant', 'text-on-surface-variant');
+        });
+        btn.classList.add('border-primary', 'bg-primary-container/10', 'text-primary');
+        btn.classList.remove('border-surface-variant', 'text-on-surface-variant');
+      });
+    });
+  </script>
+</body></html>

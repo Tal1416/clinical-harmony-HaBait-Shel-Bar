@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pattern History | Clinical Harmony</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2e3132",
+                      "surface-container": "#eceeef",
+                      "surface-container-low": "#f2f4f5",
+                      "inverse-on-surface": "#eff1f2",
+                      "secondary": "#5f5982",
+                      "outline-variant": "#bdc9ca",
+                      "surface-variant": "#e1e3e4",
+                      "error-container": "#ffdad6",
+                      "on-primary": "#ffffff",
+                      "primary": "#006168",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#e4e1ea",
+                      "inverse-primary": "#7cd4dd",
+                      "on-primary-fixed": "#002022",
+                      "surface-container-high": "#e7e8e9",
+                      "on-secondary-fixed-variant": "#474269",
+                      "tertiary-fixed-dim": "#c8c5ce",
+                      "primary-fixed-dim": "#7cd4dd",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#5b557d",
+                      "primary-container": "#0d7c84",
+                      "secondary-fixed": "#e5deff",
+                      "surface-dim": "#d8dadb",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#d9fcff",
+                      "surface-container-highest": "#e1e3e4",
+                      "primary-fixed": "#98f1f9",
+                      "surface": "#f8f9fa",
+                      "on-surface-variant": "#3e494a",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#c9c1f0",
+                      "on-tertiary-fixed": "#1b1b21",
+                      "secondary-container": "#d4ccfc",
+                      "outline": "#6e797a",
+                      "surface-tint": "#006970",
+                      "tertiary-container": "#706f77",
+                      "on-primary-fixed-variant": "#004f54",
+                      "background": "#f8f9fa",
+                      "on-tertiary-container": "#f7f3fc",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#46464d",
+                      "on-secondary-fixed": "#1c163b",
+                      "on-background": "#191c1d",
+                      "surface-bright": "#f8f9fa",
+                      "on-surface": "#191c1d",
+                      "tertiary": "#57575e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "container-padding-mobile": "16px",
+                      "container-padding-desktop": "40px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Atkinson Hyperlegible Next"],
+                      "data-mono": ["Atkinson Hyperlegible Next"],
+                      "body-lg": ["Atkinson Hyperlegible Next"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "headline-sm": ["Manrope"],
+                      "body-md": ["Atkinson Hyperlegible Next"],
+                      "body-sm": ["Atkinson Hyperlegible Next"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "data-mono": ["16px", {"lineHeight": "24px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-inverse-surface shadow-sm flex flex-col h-full py-unit px-stack-md z-50">
+<div class="mb-stack-lg px-2">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Harmony</span>
+</div>
+<div class="flex items-center gap-3 px-2 mb-stack-lg">
+<img alt="Patient profile avatar" class="w-10 h-10 rounded-full bg-secondary-container" data-alt="A professional studio portrait of a friendly-looking middle-aged woman with a warm smile, wearing a clinical yet soft knit sweater. The lighting is bright and airy, reflecting a high-key medical office environment. The background is a soft-focus clinical setting with light teal accents and clean white surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnoKAsFrExnARHa3ZgPphxZ4p6n88cdVooXfWvXrXSv7NRO5b2nrmrzxmge4eeflI_4MHjcYYTIH88VVEdAk1-33Cccti7NQd9Xy9I-ChyoNBpT9_U-mwebzI85Sk7F8vOmcc-mKtf9ogw55abFFkv9kuWZr2G3W3tipdG9WK_bUTcI9YPYC8aKD5PEMS_uGp82jhxUdP1wfgzP8Ozny5drXRmRvENPpntYEvQxTDDHjXgz1VbO5wNf_htHX_LW-n1RWYAB6uuUd0"/>
+<div>
+<p class="text-label-caps font-label-caps text-on-surface">Sarah Mitchell</p>
+<p class="text-body-sm text-on-surface-variant">WH-9821</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-caps font-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-variant/50 transition-colors group" href="#">
+<span class="material-symbols-outlined">monitor_heart</span>
+<span class="text-label-caps font-label-caps">Symptom Log</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-label-caps font-label-caps">Clinical Team</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="text-label-caps font-label-caps">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-variant transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+</nav>
+<button class="mt-4 mb-8 w-full bg-primary text-on-primary py-3 rounded-xl font-bold flex items-center justify-center gap-2 shadow-md active:scale-95 duration-150">
+<span class="material-symbols-outlined">add_circle</span>
+            Log Symptom
+        </button>
+<div class="border-t border-surface-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-label-caps font-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-label-caps font-label-caps">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Shell -->
+<header class="flex justify-between items-center w-full px-container-padding-desktop py-stack-sm ml-64 sticky top-0 bg-surface/80 backdrop-blur-md z-40 border-b border-surface-variant">
+<div class="flex items-center gap-8">
+<h1 class="text-headline-sm font-headline-sm font-bold text-primary">Pattern History</h1>
+<div class="hidden lg:flex gap-6">
+<a class="text-primary border-b-2 border-primary pb-1 text-body-md" href="#">My Care</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Team Chat</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search data points..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant">search</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">emergency_home</span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 p-container-padding-desktop min-h-screen">
+<!-- Filter Bar -->
+<section class="flex flex-wrap items-center justify-between gap-gutter mb-stack-lg">
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-label-caps flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+                    Last 6 Months
+                </button>
+<button class="px-4 py-2 bg-white border border-surface-variant text-on-surface-variant rounded-full text-label-caps flex items-center gap-2 hover:bg-surface-container transition-colors">
+                    Symptom Type: All
+                    <span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+<button class="px-4 py-2 bg-white border border-surface-variant text-on-surface-variant rounded-full text-label-caps flex items-center gap-2 hover:bg-surface-container transition-colors">
+                    Lifestyle Factors
+                    <span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant text-body-sm">
+<span class="material-symbols-outlined">info</span>
+                Confidence level in data: High (94%)
+            </div>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Heatmap/Trend View -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<div class="bg-white rounded-xl shadow-sm border border-surface-variant p-gutter">
+<div class="flex justify-between items-start mb-stack-lg">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Symptom Correlation Heatmap</h2>
+<p class="text-body-sm text-on-surface-variant">Mapping Pelvic Pain vs. Sleep Quality over the last 180 days</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 bg-surface-container rounded-lg"><span class="material-symbols-outlined">share</span></button>
+<button class="p-2 bg-surface-container rounded-lg"><span class="material-symbols-outlined">file_download</span></button>
+</div>
+</div>
+<!-- Visualization Placeholder: Synthetic Heatmap -->
+<div class="w-full aspect-[21/9] bg-surface-container-low rounded-lg p-stack-md flex flex-col justify-between">
+<div class="flex-1 grid grid-cols-30 gap-1 overflow-hidden">
+<!-- JS will ideally fill this, but let's place some sample blocks -->
+<script>
+                                document.write(Array(210).fill(0).map(() => {
+                                    const intensity = Math.floor(Math.random() * 4);
+                                    const colors = ['bg-surface-container', 'bg-primary/20', 'bg-primary/50', 'bg-primary'];
+                                    return `<div class="h-full rounded-sm ${colors[intensity]} opacity-80 hover:scale-110 transition-transform cursor-pointer" title="Data point recorded"></div>`;
+                                }).join(''));
+                            </script>
+</div>
+<div class="flex justify-between mt-4 text-label-caps text-on-surface-variant">
+<span>January</span>
+<span>February</span>
+<span>March</span>
+<span>April</span>
+<span>May</span>
+<span>June</span>
+</div>
+</div>
+<div class="mt-gutter grid grid-cols-3 gap-gutter">
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-primary rounded-full"></div>
+<div>
+<p class="text-label-caps text-on-surface-variant">Peak Intensity</p>
+<p class="text-data-mono font-data-mono">Day 14-16</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-secondary rounded-full"></div>
+<div>
+<p class="text-label-caps text-on-surface-variant">Sleep Impact</p>
+<p class="text-data-mono font-data-mono">-2.4 hrs avg</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-10 bg-tertiary rounded-full"></div>
+<div>
+<p class="text-label-caps text-on-surface-variant">Correlation</p>
+<p class="text-data-mono font-data-mono">0.82 (Strong)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Longitudinal Cycle View -->
+<div class="bg-white rounded-xl shadow-sm border border-surface-variant p-gutter">
+<h3 class="text-headline-sm font-headline-sm mb-stack-md">Longitudinal Cycle Alignment</h3>
+<div class="space-y-stack-md">
+<!-- Row 1 -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-label-caps text-on-surface-variant">MAR</span>
+<div class="flex-1 h-8 bg-surface-container rounded-full relative overflow-hidden">
+<div class="absolute left-[10%] w-[15%] h-full bg-error/30 border-x border-error/50"></div>
+<div class="absolute left-[40%] w-[5%] h-full bg-primary/40 border-x border-primary/50"></div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-label-caps text-on-surface-variant">APR</span>
+<div class="flex-1 h-8 bg-surface-container rounded-full relative overflow-hidden">
+<div class="absolute left-[12%] w-[14%] h-full bg-error/30 border-x border-error/50"></div>
+<div class="absolute left-[42%] w-[5%] h-full bg-primary/40 border-x border-primary/50"></div>
+<div class="absolute left-[60%] w-[3%] h-full bg-secondary/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-on-surface">medical_services</span>
+</div>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center gap-4">
+<span class="w-16 text-label-caps text-on-surface-variant">MAY</span>
+<div class="flex-1 h-8 bg-surface-container rounded-full relative overflow-hidden">
+<div class="absolute left-[15%] w-[12%] h-full bg-error/30 border-x border-error/50"></div>
+<div class="absolute left-[45%] w-[5%] h-full bg-primary/40 border-x border-primary/50"></div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex gap-6 text-label-caps text-on-surface-variant">
+<div class="flex items-center gap-2"><span class="w-3 h-3 bg-error/30 rounded-full"></span> Menstrual</div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 bg-primary/40 rounded-full"></span> Ovulation</div>
+<div class="flex items-center gap-2"><span class="w-3 h-3 bg-secondary/50 rounded-full"></span> Appointment</div>
+</div>
+</div>
+</div>
+<!-- Side Insights Panel -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Predictive Insight Card -->
+<div class="bg-primary-container text-on-primary-container rounded-xl p-gutter shadow-lg relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<h3 class="font-bold text-headline-sm">Clinical Insight</h3>
+</div>
+<p class="text-body-md mb-4 opacity-90">Based on your last 3 months, your symptoms show a 70% correlation with high-stress work weeks. Flare-ups typically peak 2 days after caffeine intake exceeds 300mg.</p>
+<button class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-label-caps transition-colors">Discuss with Doctor</button>
+</div>
+<!-- Decorative Background Circle -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full"></div>
+</div>
+<!-- Lifestyle Breakdown -->
+<div class="bg-white rounded-xl shadow-sm border border-surface-variant p-gutter">
+<h3 class="text-headline-sm font-headline-sm mb-stack-md">Lifestyle Context</h3>
+<div class="space-y-stack-md">
+<div class="p-4 bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-caps">Activity Level</span>
+<span class="text-data-mono text-primary">+12% vs last month</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[65%]"></div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-caps">Caffeine Intake</span>
+<span class="text-data-mono text-error">Moderate</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-error w-[40%]"></div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-caps">Hydration</span>
+<span class="text-data-mono text-primary">Target Met</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[90%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Doctor's Note Placeholder -->
+<div class="bg-surface-container-highest/40 border-2 border-dashed border-outline-variant rounded-xl p-gutter text-center">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2">clinical_notes</span>
+<p class="text-label-caps text-on-surface-variant mb-4">No recent doctor notes on this view</p>
+<button class="text-primary font-bold hover:underline">Request Professional Review</button>
+</div>
+<!-- Featured Image - Supportive Aesthetic -->
+<div class="rounded-xl overflow-hidden h-48 relative">
+<img alt="Serene healthcare environment" class="w-full h-full object-cover" data-alt="A tranquil, minimalist clinical consultation room filled with soft, natural sunlight from a large window overlooking a lush green garden. The interior features warm wood textures, ergonomic white chairs, and a subtle lavender color palette. The mood is peaceful, empathetic, and designed to reduce medical anxiety, emphasizing a holistic approach to patient health." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJW0KJ8cjTofHo3s3m-Ow9HClv0qthOkEAWHtC7V9qskzb2JlM3JqNuIrkMWPXpVxe6_wcRK3hj3zTCWMZXEqILKDV1ikhYa4dOng-SV94kS8OKbhB8cZgNmwXhGql2gpEY1mRdhf_xenTRCk0CQZp7jACvcAMAc4_B0f4QVXl-wPmW47iatnCNS0qPkF9JzJ7MvreRHgCz6Ccwe5rjKNu6-gPCCDUH-BlMxgBaf9MQfGyyFuBCij7RN243qCUJuSlV2960LD-9GU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+<p class="text-white text-body-sm font-medium">Preparing for your June 12th Follow-up</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Timeline Summary -->
+<section class="mt-gutter mb-stack-lg">
+<div class="bg-white rounded-xl shadow-sm border border-surface-variant p-gutter">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-headline-sm font-headline-sm">Appointment &amp; Event History</h3>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-label-caps">Clinicals</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-label-caps">Logs</span>
+</label>
+</div>
+</div>
+<div class="relative">
+<!-- Vertical line for timeline -->
+<div class="absolute left-6 top-0 bottom-0 w-0.5 bg-surface-variant"></div>
+<div class="space-y-stack-lg relative">
+<!-- Timeline Item 1 -->
+<div class="flex gap-6 items-start">
+<div class="z-10 w-12 h-12 rounded-full bg-primary-container flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-on-primary-container">medical_information</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-4 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-surface">Consultation with Dr. Aris</h4>
+<span class="text-label-caps text-on-surface-variant">May 24, 2024</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Reviewed pain patterns; adjusted supplement dosage to 200mg/daily. Noted improved sleep markers.</p>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="flex gap-6 items-start">
+<div class="z-10 w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-on-secondary-container">assignment</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-4 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-surface">Full Blood Panel Results</h4>
+<span class="text-label-caps text-on-surface-variant">May 12, 2024</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Inflammatory markers down by 15%. Iron levels stable. Data uploaded to clinical portal.</p>
+</div>
+</div>
+<!-- Timeline Item 3 -->
+<div class="flex gap-6 items-start">
+<div class="z-10 w-12 h-12 rounded-full bg-error-container flex items-center justify-center border-4 border-background">
+<span class="material-symbols-outlined text-on-error-container">warning</span>
+</div>
+<div class="flex-1 bg-surface-container-low p-4 rounded-xl hover:shadow-md transition-shadow cursor-pointer">
+<div class="flex justify-between items-start">
+<h4 class="font-bold text-on-surface">Symptom Flare Detected</h4>
+<span class="text-label-caps text-on-surface-variant">April 30, 2024</span>
+</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Intensity Level 8 recorded. Associated with travel and dietary changes. Duration: 48 hours.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Interactions Script -->
+<script>
+        // Simple micro-interaction for cards
+        document.querySelectorAll('.hover\\:shadow-md').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.2s ease-out';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Theme switching simulation (optional visual feedback)
+        console.log("Pattern History UI Loaded with Clinical Authority and Empathetic Care.");
+    </script>
+</body></html>
