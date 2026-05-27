@@ -13,7 +13,11 @@ export default function Sidebar() {
   return (
     <aside className="h-screen w-64 fixed left-0 top-0 flex flex-col py-unit px-stack-md bg-surface-container-low/85 backdrop-blur-md shadow-sm z-50">
       <div className="mb-stack-md px-unit pt-stack-sm">
-        <NavLink to="/dashboard" className="flex items-center gap-2 text-primary">
+        <NavLink
+          to="/"
+          title="Back to landing"
+          className="flex items-center gap-2 text-primary hover:opacity-80 transition-opacity focus-bloom"
+        >
           <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>spa</span>
           <h1 className="text-headline-md font-headline-md font-bold">Clinical Harmony</h1>
         </NavLink>
