@@ -63,8 +63,8 @@ export default function ScrollEffects() {
       g.dataset.revealGroup = '';
     });
 
-    // Promote big headlines to gradient text
-    document.querySelectorAll('main h1.text-headline-lg, header h2.text-headline-sm')
+    // Promote big page headlines to gradient text (TopNav title already is)
+    document.querySelectorAll('main h1.text-headline-lg')
       .forEach(h => h.classList.add('gradient-text'));
 
     const io = new IntersectionObserver(entries => {

@@ -5,33 +5,126 @@
 /* Clinical Harmony — shared styles. The "calm room" aesthetic. */
 
 :root {
-  /* Bloom palette */
-  --primary: #8E3A5D;
-  --on-primary: #ffffff;
-  --primary-container: #A5476F;
-  --primary-fixed: #FFD9E2;
-  --primary-fixed-dim: #FFB1C8;
+  color-scheme: light;
 
-  --secondary: #5F8A6E;
-  --on-secondary: #ffffff;
-  --secondary-container: #CFE4D6;
-  --secondary-fixed-dim: #B3C9B9;
+  /* ── Bloom palette — RGB triplets, consumed as rgb(var(--c-x) / a) ──
+     Tailwind maps every color token to one of these (see tailwind.config.js).
+     The .dark block below re-themes the whole app by overriding these only. */
+  --c-primary: 142 58 93;
+  --c-on-primary: 255 255 255;
+  --c-primary-container: 165 71 111;
+  --c-on-primary-container: 255 220 229;
+  --c-primary-fixed: 255 217 226;
+  --c-primary-fixed-dim: 255 177 200;
+  --c-on-primary-fixed: 43 10 22;
+  --c-on-primary-fixed-variant: 110 39 72;
+  --c-inverse-primary: 255 177 200;
+  --c-surface-tint: 142 58 93;
 
-  --tertiary: #8C6748;
-  --tertiary-container: #F5CFA6;
+  --c-secondary: 95 138 110;
+  --c-on-secondary: 255 255 255;
+  --c-secondary-container: 207 228 214;
+  --c-on-secondary-container: 28 58 38;
+  --c-secondary-fixed: 207 228 214;
+  --c-secondary-fixed-dim: 179 201 185;
+  --c-on-secondary-fixed: 13 31 18;
+  --c-on-secondary-fixed-variant: 61 102 80;
 
-  --error: #BA1A1A;
+  --c-tertiary: 140 103 72;
+  --c-on-tertiary: 255 255 255;
+  --c-tertiary-container: 245 207 166;
+  --c-on-tertiary-container: 46 28 10;
+  --c-tertiary-fixed: 245 207 166;
+  --c-tertiary-fixed-dim: 214 180 138;
+  --c-on-tertiary-fixed: 46 28 10;
+  --c-on-tertiary-fixed-variant: 94 69 48;
 
-  --surface: #FBF7F6;
-  --on-surface: #251A1D;
-  --surface-variant: #E8DADD;
+  --c-error: 186 26 26;
+  --c-on-error: 255 255 255;
+  --c-error-container: 255 218 214;
+  --c-on-error-container: 147 0 10;
+
+  --c-surface: 251 247 246;
+  --c-on-surface: 37 26 29;
+  --c-on-surface-variant: 76 64 68;
+  --c-surface-variant: 232 218 221;
+  --c-surface-dim: 221 214 215;
+  --c-surface-bright: 251 247 246;
+  --c-surface-container-lowest: 255 255 255;
+  --c-surface-container-low: 245 238 237;
+  --c-surface-container: 239 232 231;
+  --c-surface-container-high: 235 226 225;
+  --c-surface-container-highest: 227 218 218;
+  --c-inverse-surface: 58 47 49;
+  --c-inverse-on-surface: 245 238 237;
+  --c-outline: 125 110 114;
+  --c-outline-variant: 209 194 197;
+
+  --c-background: 251 247 246;
+  --c-on-background: 37 26 29;
+
+  --c-status-safe: 31 111 67;
+  --c-status-safe-container: 214 241 222;
+  --c-status-monitor: 163 107 0;
+  --c-status-monitor-container: 253 231 179;
 
   --scroll: 0;
   --scroll-px: 0px;
 }
 
-html { scroll-behavior: smooth; background: var(--surface); }
-html, body { color: var(--on-surface); }
+.dark {
+  color-scheme: dark;
+
+  --c-primary: 255 177 200;
+  --c-on-primary: 92 17 54;
+  --c-primary-container: 123 44 80;
+  --c-on-primary-container: 255 217 226;
+  /* -fixed tokens are intentionally theme-constant (Material 3 convention) */
+  --c-inverse-primary: 142 58 93;
+  --c-surface-tint: 255 177 200;
+
+  --c-secondary: 179 201 185;
+  --c-on-secondary: 34 67 47;
+  --c-secondary-container: 61 102 80;
+  --c-on-secondary-container: 207 228 214;
+
+  --c-tertiary: 230 186 142;
+  --c-on-tertiary: 72 48 26;
+  --c-tertiary-container: 94 69 48;
+  --c-on-tertiary-container: 245 207 166;
+
+  --c-error: 255 180 171;
+  --c-on-error: 105 0 5;
+  --c-error-container: 147 0 10;
+  --c-on-error-container: 255 218 214;
+
+  --c-surface: 26 17 21;
+  --c-on-surface: 236 224 226;
+  --c-on-surface-variant: 208 195 198;
+  --c-surface-variant: 76 64 68;
+  --c-surface-dim: 26 17 21;
+  --c-surface-bright: 66 53 57;
+  --c-surface-container-lowest: 20 12 15;
+  --c-surface-container-low: 35 25 32;
+  --c-surface-container: 39 29 35;
+  --c-surface-container-high: 50 39 48;
+  --c-surface-container-highest: 61 49 58;
+  --c-inverse-surface: 236 224 226;
+  --c-inverse-on-surface: 53 46 48;
+  --c-outline: 158 140 144;
+  --c-outline-variant: 81 67 71;
+
+  --c-background: 26 17 21;
+  --c-on-background: 236 224 226;
+
+  --c-status-safe: 124 215 160;
+  --c-status-safe-container: 17 81 47;
+  --c-status-monitor: 241 193 94;
+  --c-status-monitor-container: 90 61 0;
+}
+
+html { scroll-behavior: smooth; background: rgb(var(--c-surface)); }
+html, body { color: rgb(var(--c-on-surface)); }
 body { background: transparent; font-family: "Atkinson Hyperlegible Next", system-ui, sans-serif; }
 
 .material-symbols-outlined {
@@ -51,29 +144,32 @@ body { background: transparent; font-family: "Atkinson Hyperlegible Next", syste
 }
 
 /* Status bars on cards */
-.status-card-stable { border-left: 4px solid #8E3A5D; }
-.status-card-alert  { border-left: 4px solid #BA1A1A; }
-.status-card-monitor{ border-left: 4px solid #A36B00; }
+.status-card-stable { border-left: 4px solid rgb(var(--c-primary)); }
+.status-card-alert  { border-left: 4px solid rgb(var(--c-error)); }
+.status-card-monitor{ border-left: 4px solid rgb(var(--c-status-monitor)); }
 
 /* Severity slider */
 .severity-slider {
   -webkit-appearance: none;
   width: 100%; height: 8px;
-  background: #eceeef; border-radius: 9999px; outline: none;
+  background: rgb(var(--c-surface-variant)); border-radius: 9999px; outline: none;
+}
+.severity-slider:focus-visible {
+  outline: 2px solid rgb(var(--c-primary)); outline-offset: 4px;
 }
 .severity-slider::-webkit-slider-thumb {
   -webkit-appearance: none; appearance: none;
   width: 24px; height: 24px;
-  background: var(--primary);
+  background: rgb(var(--c-primary));
   cursor: pointer; border-radius: 50%;
-  border: 4px solid #ffffff;
-  box-shadow: 0 4px 8px -2px rgba(142, 58, 93, .35);
+  border: 4px solid rgb(var(--c-surface-container-lowest));
+  box-shadow: 0 4px 8px -2px rgb(var(--c-primary) / .35);
 }
 .severity-slider::-moz-range-thumb {
   width: 24px; height: 24px;
-  background: var(--primary);
+  background: rgb(var(--c-primary));
   cursor: pointer; border-radius: 50%;
-  border: 4px solid #ffffff;
+  border: 4px solid rgb(var(--c-surface-container-lowest));
 }
 .severity-gradient {
   background: linear-gradient(to right, #4ade80, #facc15, #f87171);
@@ -81,7 +177,7 @@ body { background: transparent; font-family: "Atkinson Hyperlegible Next", syste
 
 /* Glass card */
 .glass-card {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgb(var(--c-surface-container-lowest) / 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
@@ -107,8 +203,23 @@ body { background: transparent; font-family: "Atkinson Hyperlegible Next", syste
 
 /* Print mode */
 @media print {
-  aside, header, .no-print { display: none !important; }
+  /* Force the light neutral palette so reports stay legible even from dark mode */
+  :root, .dark {
+    --c-surface: 255 255 255;
+    --c-surface-container-lowest: 255 255 255;
+    --c-surface-container-low: 245 238 237;
+    --c-surface-container: 239 232 231;
+    --c-surface-container-high: 235 226 225;
+    --c-surface-container-highest: 227 218 218;
+    --c-surface-variant: 232 218 221;
+    --c-on-surface: 37 26 29;
+    --c-on-surface-variant: 76 64 68;
+    --c-outline-variant: 209 194 197;
+    --c-background: 255 255 255;
+  }
+  aside, header, .no-print, .gradient-bg, .scroll-progress { display: none !important; }
   main { margin-left: 0 !important; padding: 0 !important; }
+  .lg\:pl-64 { padding-left: 0 !important; }
   body { background: #ffffff; }
   .print-canvas { box-shadow: none; border: none; }
 }
@@ -201,10 +312,43 @@ details.smooth > div > * { overflow: hidden; min-height: 0; }
 
 /* Soft focus ring with brand color */
 .focus-bloom:focus-visible {
-  outline: 2px solid #8E3A5D;
+  outline: 2px solid rgb(var(--c-primary));
   outline-offset: 3px;
   border-radius: 12px;
 }
+
+/* Global keyboard focus ring — visible everywhere, never on mouse click.
+   Interactive elements that opt out (those using .focus-bloom or custom rings)
+   are unaffected because they set their own :focus-visible styles. */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid rgb(var(--c-primary));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Skip-to-content link — visually hidden until focused */
+.skip-link {
+  position: fixed; top: 12px; left: 12px; z-index: 200;
+  background: rgb(var(--c-primary)); color: rgb(var(--c-on-primary));
+  padding: 10px 16px; border-radius: 10px; font-weight: 700;
+  transform: translateY(-150%); transition: transform .2s ease;
+  box-shadow: 0 8px 20px -6px rgb(var(--c-primary) / .5);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* Loading skeleton shimmer */
+.skeleton {
+  position: relative; overflow: hidden;
+  background: rgb(var(--c-surface-variant) / .5);
+  border-radius: 12px;
+}
+.skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgb(var(--c-surface-container-lowest) / .35), transparent);
+  transform: translateX(-100%);
+  animation: skeletonSweep 1.4s ease-in-out infinite;
+}
+@keyframes skeletonSweep { to { transform: translateX(100%); } }
 
 /* ─── Animated gradient backdrop — Bloom (plum + sage + amber peach) ─── */
 .gradient-bg {
@@ -247,6 +391,20 @@ details.smooth > div > * { overflow: hidden; min-height: 0; }
   filter: blur(40px);
 }
 
+/* Dark backdrop — dimmer orbs over a deep warm-plum base */
+.dark .gradient-bg {
+  background:
+    radial-gradient(closest-side at var(--bg-x1, 18%) var(--bg-y1, 22%), rgba(255, 177, 200, .10), transparent 72%),
+    radial-gradient(closest-side at var(--bg-x2, 82%) var(--bg-y2, 30%), rgba(95, 138, 110, .12), transparent 72%),
+    radial-gradient(closest-side at var(--bg-x3, 60%) var(--bg-y3, 85%), rgba(245, 207, 166, .10), transparent 74%),
+    radial-gradient(closest-side at 15% 95%, rgba(255, 177, 200, .10), transparent 65%),
+    radial-gradient(closest-side at 95% 5%, rgba(140, 103, 72, .12), transparent 60%),
+    linear-gradient(180deg, #1A1115 0%, #140C0F 100%);
+  background-size: 130% 130%, 130% 130%, 130% 130%, 110% 110%, 110% 110%, 100% 100%;
+  filter: saturate(1);
+}
+.dark .gradient-bg::after { opacity: .5; }
+
 /* Scroll progress bar — slightly chunkier, glowing */
 .scroll-progress {
   position: fixed; top: 0; left: 0; height: 4px; z-index: 60;
@@ -273,6 +431,12 @@ details.smooth > div > * { overflow: hidden; min-height: 0; }
   0%   { background-position:   0% 50%; }
   100% { background-position: 200% 50%; }
 }
+.dark .gradient-text {
+  background: linear-gradient(90deg, #FFB1C8, #FFD9E2 30%, #B3C9B9 65%, #FFB1C8);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+          background-clip: text;
+}
 
 /* Reveal on scroll */
 .reveal {
@@ -298,7 +462,15 @@ details.smooth > div > * { overflow: hidden; min-height: 0; }
 [data-reveal-group].in > .reveal:nth-child(6) { transition-delay: .44s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .gradient-bg, .gradient-text { animation: none !important; }
-  .reveal { opacity: 1 !important; transform: none !important; }
+  .gradient-bg, .gradient-text, .float, .float-slow, .spin-slow,
+  .glow-pulse, .marquee-track, .bounce-dot, .count-up,
+  .entrance-item, .fade-in, .skeleton::after {
+    animation: none !important;
+  }
+  .btn-shine::after { transition: none !important; }
+  .reveal, .entrance-item, .fade-in {
+    opacity: 1 !important; transform: none !important;
+  }
+  * { transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
 }

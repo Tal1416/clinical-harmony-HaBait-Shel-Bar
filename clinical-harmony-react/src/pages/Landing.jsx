@@ -1,14 +1,32 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeProvider.jsx';
 
 function MaterialIcon({ name, className = '', filled = false, style }) {
   return (
     <span
+      aria-hidden="true"
       className={'material-symbols-outlined ' + className}
       style={{ ...(filled ? { fontVariationSettings: "'FILL' 1" } : null), ...style }}
     >
       {name}
     </span>
+  );
+}
+
+function ThemeToggle({ className = '' }) {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      className={'p-2 rounded-full text-on-surface-variant hover:bg-surface-container hover:text-primary transition focus-bloom ' + className}
+      aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-pressed={theme === 'dark'}
+      title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
+    >
+      <MaterialIcon name={theme === 'dark' ? 'light_mode' : 'dark_mode'} />
+    </button>
   );
 }
 
@@ -37,6 +55,7 @@ function NavBar() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Link to="/dashboard" className="hidden sm:inline-flex text-body-sm font-bold text-on-surface-variant hover:text-primary transition px-3 py-2 rounded-lg focus-bloom">
             Sign in
           </Link>
